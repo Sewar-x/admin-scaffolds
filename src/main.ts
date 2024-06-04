@@ -15,10 +15,10 @@ import {
 async function bootstrap() {
 
     const app = await initVue();
+    await initElementPlus(app);
     await initStore(app);
     // await initI18n(app);
     await initRoute(app);
-    await initElementPlus(app);
     // 加载自定义组件
     await initDefineComponent(app);
     app.mount("#app");

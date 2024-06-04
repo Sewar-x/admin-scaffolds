@@ -5,7 +5,7 @@ import setting from "@/settings/projectSetting";
 import fullLoadEl from "./fullLoad";
 import loadOnRemand from "./loadOnDemand";
 
-export default function setupElementPlus(app: App) {
+export function setupElementPlus(app: App) {
   if (setting.loadOnDemandEl) {
     loadOnRemand(app);
   } else {

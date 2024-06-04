@@ -43,7 +43,7 @@ export const initElementPlus = async (app: App) => {
     await import("@/plugins/element-plus/el-import").then(async (ElementPlus: any) => {
 
         // 按需加载Element-Plus组件及图标
-        await ElementPlus.default(app);;
+        await ElementPlus.setupElementPlus(app);
     });
 }
 

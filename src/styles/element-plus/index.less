@@ -16,16 +16,8 @@
   padding: 0 !important;
 }
 
-// .el-popper {
-//   max-width: 250px;
-//   // background-color:azure
-//   background-color: rgb(240,240,240) !important;
-//   color:black !important;
-//   border-color: white !important;
-//   line-height: 24px;
-//     .el-popper__arrow::before {
-//     border:none !important;
-//     background: none !important;
-//     background-color: rgb(240,240,240) !important;
-//   }
-//   }
+
+// 解决抽屉弹出时，body宽度变化的问题
+.el-popup-parent--hidden {
+  width: 100% !important;
+}

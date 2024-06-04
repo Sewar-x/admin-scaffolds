@@ -1,4 +1,4 @@
-const LocaleKey = "PMP_Locale";
+const LocaleKey = "_Locale";
 
 export function getLocale() {
   return JSON.parse(sessionStorage.getItem(LocaleKey) as string);
