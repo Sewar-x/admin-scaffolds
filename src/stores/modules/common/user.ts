@@ -1,7 +1,7 @@
 import Storage from "@/utils/storage";
 import { defineStore } from "pinia";
 import { login, logout, getInfo, checkOaLogin, getAuthList } from "@/api/common/user";
-import { router } from "@/router";
+// import { router } from "@/router";
 import { store } from "@/stores";
 import { USER_INFO_KEY } from "@/enums/cacheEnum"
 import { getToken, setToken, removeToken, getOAToken } from "@/utils/token";

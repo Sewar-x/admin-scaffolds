@@ -18,7 +18,7 @@ export function genMessage(langs: Record<string, Record<string, any>>) {
   Object.keys(langs).forEach((key) => {
     const langFileModule = langs[key].default;
 
-    for (let object in langFileModule) {
+    for (const object in langFileModule) {
       if (typeof langFileModule[object] === "string") {
         set(langObject, object, langFileModule[object]);
       } else {

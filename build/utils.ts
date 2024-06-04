@@ -40,7 +40,7 @@ export function buildAssetsFile(chunkInfo: PreRenderedAsset, ASSETS_DIR: string 
 }
 
 export function buildChunkFile(chunkInfo: PreRenderedChunk, ASSETS_DIR: string = '') {
-  let fileName = chunkInfo.name?.replace("-legacy", "");
+  const fileName = chunkInfo.name?.replace("-legacy", "");
   return ASSETS_DIR + "/js/" + fileName + "/[name]-[hash].js";
 }
 

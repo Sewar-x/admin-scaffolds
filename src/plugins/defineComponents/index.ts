@@ -1,6 +1,6 @@
 import type { App } from "vue";
 // Register icon sprite
-import "virtual:svg-icons-register";
+// import "virtual:svg-icons-register";
 
 export default function setupDefineComponent(app: App) {
   [].forEach((v) => {

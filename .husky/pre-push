@@ -1,0 +1,28 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# 代码推送前依据当前分支进行打包构建并上传（仅对 master 分支 和 test 分支进行构建）
+function current_branch() {
+  branch=""
+  testBranch="test"
+  masterBranch="master"
+  cd $PWD
+  if [ -d '.git' ]; then
+    output=`sh -c 'git branch --no-color 2> /dev/null' | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' -e 's/\//\_/g'`
+    if [ "$output" ]; then
+      branch="${output}"
+    fi
+  fi
+
+  if [ $branch == $testBranch ]
+  then
+    echo "自动构建并上传 test 分支代码"
+    npm run build:test
+  elif [ $branch == $masterBranch ]
+  then
+    echo "自动构建并上传 master 分支代码"
+    npm run build:prod
+  fi
+}
+
+current_branch

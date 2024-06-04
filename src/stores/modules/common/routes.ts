@@ -3,7 +3,6 @@ import { defineStore } from "pinia";
 import { store } from "@/stores";
 import type { RouteItem } from 'vue-router';
 import { asyncRoutes, basicRoutes } from "@/router/routes/index"
-import { envEnum } from "@/enums/systemEnum"
 /**
  * Filter asynchronous routing tables by recursion
  * 过滤没有权限的常量路由路由：递归前端路由，查找 name 不存在的路由，删除

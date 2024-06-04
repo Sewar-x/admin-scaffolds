@@ -77,7 +77,7 @@ export function deepClone(target: any) {
  */
 export function toUpper(val: string) {
   if (typeof val === "undefined") return;
-  let str = val;
+  const str = val;
   return str.replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
 }
 
@@ -199,7 +199,7 @@ export function downloadFileByLink(url: string, filename: string,) {
 
 //下载文件入口(未开发完全)
 export async function downloadFile(fileUrl: string, fileName?: string) {
-  let blob = await getBlob(fileUrl);
+  const blob = await getBlob(fileUrl);
   saveFile(blob, fileName);
 }
 
@@ -214,9 +214,9 @@ export function getBlob(fileUrl: string) {
       'progress',
       function (evt) {
         if (evt.lengthComputable) {
-          let percentComplete = evt.loaded / evt.total;
+          const percentComplete = evt.loaded / evt.total;
           // percentage是当前下载进度，可根据自己的需求自行处理
-          let percentage = percentComplete * 100;
+          const percentage = percentComplete * 100;
         }
       },
       false
