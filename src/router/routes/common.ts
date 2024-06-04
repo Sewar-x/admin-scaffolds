@@ -13,25 +13,3 @@ export const RootRoute: AppRouteRecordRaw = {
     title: "首页",
   },
 };
-
-//登录页面
-// export const LoginRoute: AppRouteRecordRaw = {
-//   path: "/login",
-//   name: "Login",
-//   component: () => import("@/views/common/login/Login.vue"),
-//   meta: {
-//     title: "登录",
-//   },
-// };
-
-
-
-// //组件测试
-// export const TestPage: AppRouteRecordRaw = {
-//   path: "/test",
-//   name: "Test",
-//   component: () => import("@/views/Demo/Upload/TestUpload.vue"),
-//   meta: {
-//     title: "组件测试",
-//   },
-// };

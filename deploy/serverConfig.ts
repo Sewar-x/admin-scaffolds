@@ -1,4 +1,4 @@
-// const OUTPUT_DIR = require("../build/constant.ts").OUTPUT_DIR;
+import type { FtpConfig } from './types.d'
 const path = require('path')
 const inquirer = require('inquirer');
 
@@ -36,9 +36,9 @@ async function getInput() {
 //获取上传配置信息
 const getConfig = async function () {
 
-  let users = {
-    user: null,
-    password: null,
+  let users: FtpConfig = {
+    user: '',
+    password: '',
     test: '',
     production: '',
     host: '',

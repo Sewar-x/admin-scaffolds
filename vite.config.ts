@@ -133,7 +133,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       },
     },
     build: {
-      target: 'es2015',
+      target: "esnext",
       outDir: VITE_OUT_DIR || 'dist',
       sourcemap: VITE_SOURCEMAP === 'true',
       // brotliSize: false,
@@ -141,9 +141,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         plugins: VITE_USE_BUNDLE_ANALYZER === 'true' ? [visualizer()] : undefined,
         // 拆包
         output: {
-          chunkFileNames: (chunkInfo) => buildChunkFile(chunkInfo, VITE_ASSETS_DIR),
+          chunkFileNames: (chunkInfo: any) => buildChunkFile(chunkInfo, VITE_ASSETS_DIR),
           entryFileNames: "[name]-[hash].js",
-          assetFileNames: (chunkInfo) => buildAssetsFile(chunkInfo, VITE_ASSETS_DIR),
+          assetFileNames: (chunkInfo: any) => buildAssetsFile(chunkInfo, VITE_ASSETS_DIR),
           manualChunks: {
             'vue-chunks': ['vue', 'vue-router', 'pinia', 'vue-i18n'],
             'element-plus': ['element-plus'],
