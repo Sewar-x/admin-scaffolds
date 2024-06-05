@@ -4,6 +4,9 @@ import dotenv from 'dotenv';
 
 import type { PreRenderedAsset, PreRenderedChunk } from "rollup";
 
+/**
+ *  将 VITE_ 环境变量字符串值转为对应的类型
+ **/ 
 export function wrapperEnv(envConf: Recordable): ViteEnv {
   const ret: any = {};
 

@@ -25,12 +25,11 @@ const root = process.cwd()
 export default ({ command, mode }: ConfigEnv): UserConfig => {
 
   const isBuild = command === 'build'
-  // 加载 root 中的 .env 文件。
+  // 加载 root 中的 .env 文件。根据执行命令的环境类型获取变量
   const env = loadEnv(mode, root);
 
   // loadEnv读取的布尔类型是一个字符串。这个函数可以转换为布尔类型
   const viteEnv = wrapperEnv(env);
-
   const {
     VITE_BASE_PATH,
     VITE_USE_ALL_ELEMENT_PLUS_STYLE,
@@ -56,7 +55,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           defineModel: true
         },
         template: {
-          compilerOptions: VITE_USE_MICRO_APP === 'true' ? {
+          compilerOptions: VITE_USE_MICRO_APP ? {
             isCustomElement: tag => /^micro-app/.test(tag)
           } : {}
         }
@@ -64,7 +63,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       vueJsx(),
       progress(),
       // 是否全量引入 element plus
-      VITE_USE_ALL_ELEMENT_PLUS_STYLE === 'false'
+      VITE_USE_ALL_ELEMENT_PLUS_STYLE === false
         ? createStyleImportPlugin({
           resolves: [ElementPlusResolve()],
           libs: [
@@ -120,8 +119,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     },
     // 构建选项
     esbuild: {
-      pure: VITE_DROP_CONSOLE === 'true' ? ['console.log'] : undefined,
-      drop: VITE_DROP_DEBUGGER === 'true' ? ['debugger'] : undefined
+      pure: VITE_DROP_CONSOLE ? ['console.log'] : undefined,
+      drop: VITE_DROP_DEBUGGER? ['debugger'] : undefined
     },
     resolve: {
       alias: {
@@ -158,7 +157,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           drop_console: VITE_DROP_CONSOLE,
         },
       },
-      cssCodeSplit: !(VITE_USE_CSS_SPLIT === 'false')
+      cssCodeSplit:VITE_USE_CSS_SPLIT
     },
     server: {
       port: VITE_DEV_PORT, // 自定义端口号  

@@ -5,7 +5,6 @@ import type { App } from "vue";
  * @param app {App}
  */
 import { ElIcon, ElButton, ElInput, ElCheckbox } from "element-plus";
-import "@/style/element-plus/index.less";
 // import Modal from "@/components/Dialog";
 
 /**
@@ -17,7 +16,7 @@ import { Edit, Tools, Location, Setting } from "@element-plus/icons-vue";
 export default function loadOnDemandEl(app: App) {
   // 为了开发环境启动更快，一次性引入所有样式
   if (import.meta.env.VITE_USE_ALL_ELEMENT_PLUS_STYLE === 'true') {
-    import('element-plus/dist/index.css')
+    import('@/styles/element-plus/index.less')
   }
   [ElButton, ElIcon, ElInput, ElCheckbox].forEach((v) => {
     app.use(v);

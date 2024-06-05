@@ -6,7 +6,7 @@ import type { App } from "vue";
  */
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
-import "@/style/element-plus/index.less";
+import "@/styles/element-plus/index.less";
 // import Modal from "@/components/Dialog";
 
 /**
