@@ -12,13 +12,15 @@ import {
     initXWElementPlus,
     initDefineComponent,
     initI18n,
-    initMicroApp
+    initMicroApp,
+    initXWPermission
 } from "@/init"
 
 const {
     VITE_MULTIPLE_LANGUAGES,
     VITE_USE_MICRO_APP,
-    VITE_USE_XW_UI_ELEMENT_PLUS
+    VITE_USE_XW_UI_ELEMENT_PLUS,
+    VITE_USE_XW_UI_PERMISSION
 } = getAppEnvConfig()
 
 async function bootstrap() {
@@ -41,6 +43,11 @@ async function bootstrap() {
     if (VITE_USE_MICRO_APP === 'true') {
         await initMicroApp();
     }
+    // 使用 路由权限控制
+    if (VITE_USE_XW_UI_PERMISSION === 'true') {
+        await initXWPermission(app);
+    }
+
     app.mount("#app");
 }
 

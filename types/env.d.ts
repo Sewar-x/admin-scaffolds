@@ -20,6 +20,7 @@ export interface ImportMetaEnv {
     readonly VITE_ASSETS_DIR: string,
     readonly VITE_DEV_PORT: string,
     readonly VITE_USE_XW_UI_ELEMENT_PLUS: string,
+    readonly VITE_USE_XW_UI_PERMISSION: string,
 }
 
 export declare global {
