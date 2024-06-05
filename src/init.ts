@@ -47,11 +47,18 @@ export const initElementPlus = async (app: App) => {
     });
 }
 
+// 初始化 json scheme 组件库 xw-ui/element-plus 
+export const initXWElementPlus = async (app: App) => {
+    await import("@/plugins/xw-element-plus/index").then(async (XWUI: any) => {
+        XWUI.setuploadXWElementPlus(app);
+    });
+}
+
 // 初始化自定义组件
 export const initDefineComponent = async (app: App) => {
     await import("@/plugins/defineComponents").then(async (Component: any) => {
-        // 按需加载Element-Plus组件及图标
-        await Component.default(app);;
+        // 按需加载自定义组件
+        await Component.setupDefineComponent(app);
     });
 }
 

@@ -27,7 +27,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
   const isBuild = command === 'build'
   // 加载 root 中的 .env 文件。根据执行命令的环境类型获取变量
   const env = loadEnv(mode, root);
-
   // loadEnv读取的布尔类型是一个字符串。这个函数可以转换为布尔类型
   const viteEnv = wrapperEnv(env);
   const {
@@ -120,7 +119,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     // 构建选项
     esbuild: {
       pure: VITE_DROP_CONSOLE ? ['console.log'] : undefined,
-      drop: VITE_DROP_DEBUGGER? ['debugger'] : undefined
+      drop: VITE_DROP_DEBUGGER ? ['debugger'] : undefined
     },
     resolve: {
       alias: {
@@ -157,7 +156,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           drop_console: VITE_DROP_CONSOLE,
         },
       },
-      cssCodeSplit:VITE_USE_CSS_SPLIT
+      cssCodeSplit: VITE_USE_CSS_SPLIT
     },
     server: {
       port: VITE_DEV_PORT, // 自定义端口号  

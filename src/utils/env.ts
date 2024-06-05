@@ -16,6 +16,7 @@ export function getAppEnvConfig() {
     : window[ENV_NAME as any]) as unknown as ImportMetaEnv;
 
   const {
+    VITE_APP_TITLE,
     VITE_BASE_PATH,
     VITE_USE_ALL_ELEMENT_PLUS_STYLE,
     VITE_PROXY,
@@ -29,10 +30,12 @@ export function getAppEnvConfig() {
     VITE_USE_CSS_SPLIT,
     VITE_DEV_PORT,
     VITE_USE_MICRO_APP,
-    VITE_MULTIPLE_LANGUAGES
+    VITE_MULTIPLE_LANGUAGES,
+    VITE_USE_XW_UI_ELEMENT_PLUS
   } = ENV;
 
   return {
+    VITE_APP_TITLE,
     VITE_BASE_PATH,
     VITE_USE_ALL_ELEMENT_PLUS_STYLE,
     VITE_PROXY,
@@ -46,6 +49,7 @@ export function getAppEnvConfig() {
     VITE_USE_CSS_SPLIT,
     VITE_DEV_PORT,
     VITE_USE_MICRO_APP,
-    VITE_MULTIPLE_LANGUAGES
+    VITE_MULTIPLE_LANGUAGES,
+    VITE_USE_XW_UI_ELEMENT_PLUS
   };
 }

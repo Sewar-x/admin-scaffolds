@@ -5,7 +5,7 @@ import type { App } from "vue";
  * @param app {App}
  */
 import { ElIcon, ElButton, ElInput, ElCheckbox } from "element-plus";
-// import Modal from "@/components/Dialog";
+
 
 /**
  * 按需导入 element-plus 图标
@@ -24,6 +24,5 @@ export default function loadOnDemandEl(app: App) {
   [Edit, Tools, Location, Setting].forEach((v) => {
     app.component(v.name, v);
   });
-  // Modal._context = app._context;
   return app;
 }
