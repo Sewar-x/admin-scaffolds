@@ -4,26 +4,32 @@ import type { App } from "vue";
 
 // 白名单应该包含基本静态路由
 export const WHITE_NAME_LIST: string[] = [];
-//获取常量路由白名单
-const getRouteNames = (array: any[]) =>
+
+// 获取路由名称
+const getRouteNames = (array: any[]) => {
   array.forEach((item) => {
     WHITE_NAME_LIST.push(item.name);
     getRouteNames(item.children || []);
   });
+}
+
+//获取常量路由白名单
 getRouteNames(basicRoutes);
 
 // app router
 // 创建一个可以被 Vue 应用程序使用的路由实例
 export const router = createRouter({
   // 创建一个 hash 历史记录。
-  history: createWebHashHistory(import.meta.env.VITE_PUBLIC_PATH),
+  history: createWebHashHistory(import.meta.env.VITE_OUT_DIR),
   // 应该添加到路由的初始路由列表。
   routes: [...asyncRoutes, ...basicRoutes] as unknown as RouteRecordRaw[],
-  // 是否应该禁止尾部斜杠。默认为假
+  // 是否应该禁止尾部斜杠。默认为 false
   strict: false,
   scrollBehavior: () => ({ left: 0, top: 0 }),
 });
-// reset router
+
+
+// 重置路由
 export function resetRouter() {
   router.getRoutes().forEach((route) => {
     const { name } = route;

@@ -13,3 +13,18 @@ export const RootRoute: AppRouteRecordRaw = {
     title: "首页",
   },
 };
+
+//登录页面
+export const LoginRoute: AppRouteRecordRaw = {
+  path: "/login",
+  name: "Login",
+  component: () => import("@/views/login/index.vue"),
+  meta: {
+    title: "登录",
+  },
+};
+
+export default [
+  RootRoute,
+  LoginRoute
+]

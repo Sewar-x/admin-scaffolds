@@ -15,10 +15,10 @@ export const initRoute = async (app: App) => {
     await import("@/router").then(async (router: any) => {
         // 配置路由
         router.setupRouter(app);
-        const guard = await import("@/router/guard");
-        // router-guard
-        // 路由守卫
-        guard.setupRouterGuard(router.router);
+        // const guard = await import("@/router/guard");
+        // // router-guard
+        // // 路由守卫
+        // guard.setupRouterGuard(router.router);
     });
 }
 

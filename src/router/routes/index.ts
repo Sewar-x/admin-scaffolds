@@ -1,20 +1,23 @@
 import type { AppRouteModule } from "@/router/types";
-import { RootRoute } from "./common";
+import BasicRoutes from "./basicRoutes";
 
 // import.meta.globEager() 直接引入所有的模块 Vite 独有的功能
-const modules = import.meta.globEager("./modules/**/index.ts") as any;
-const routeModuleList: Array<AppRouteModule> = []
+const modules = import.meta.glob('../modules/*.ts', { eager: true, import: 'default' })
 
-// 加入到路由集合中
-Object.keys(modules).forEach((key) => {
-  const mod = modules[key].default || {};
-  const name = mod.name as string
-  const modList = Array.isArray(mod) ? [...mod] : [mod];
-  routeModuleList[name as string] = modList[0]
-});
+
+//  获取异步路由列表
+function getAsyncRoutes(): Array<AppRouteModule> {
+  let asyncRoutes: Array<AppRouteModule> = [];
+  Object.keys(modules).forEach((key) => {
+    const mod = modules[key] || {};
+    asyncRoutes = Array.isArray(mod) ? [...asyncRoutes, ...mod] : [...asyncRoutes, mod];
+  });
+  return asyncRoutes
+}
+
+
 //异步路由：通过后端接口遍历生成
-export const asyncRoutes = [routeModuleList];
+export const asyncRoutes = getAsyncRoutes();
 
-// Basic routing without permission
 // 无需权限的基本路由
-export const basicRoutes = [RootRoute, routeModuleList];
+export const basicRoutes = BasicRoutes;
