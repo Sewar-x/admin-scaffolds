@@ -1,20 +1,10 @@
 import { createRouter, createWebHashHistory, type RouteRecordRaw } from "vue-router";
-import { basicRoutes, asyncRoutes } from "./routes/index";
+import asyncRoutes from "@/router/asyncRoutes";
+import basicRoutes from "@/router/basicRoutes";
+import whiteList from "@/router/basicRoutes/whiteList";
 import type { App } from "vue";
 
-// 白名单应该包含基本静态路由
-export const WHITE_NAME_LIST: string[] = [];
 
-// 获取路由名称
-const getRouteNames = (array: any[]) => {
-  array.forEach((item) => {
-    WHITE_NAME_LIST.push(item.name);
-    getRouteNames(item.children || []);
-  });
-}
-
-//获取常量路由白名单
-getRouteNames(basicRoutes);
 
 // app router
 // 创建一个可以被 Vue 应用程序使用的路由实例
@@ -33,7 +23,7 @@ export const router = createRouter({
 export function resetRouter() {
   router.getRoutes().forEach((route) => {
     const { name } = route;
-    if (name && !WHITE_NAME_LIST.includes(name as string)) {
+    if (name && !whiteList.includes(name as string)) {
       router.hasRoute(name) && router.removeRoute(name);
     }
   });

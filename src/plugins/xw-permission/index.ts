@@ -1,7 +1,8 @@
 import type { App } from "vue";
 import initPermission from "xw-ui/permission"
-import { basicRoutes, asyncRoutes } from "@/router/routes";
-import { WHITE_NAME_LIST } from "@/router";
+import asyncRoutes from "@/router/asyncRoutes";
+import basicRoutes from "@/router/basicRoutes";
+import whiteList from "@/router/basicRoutes/whiteList";
 
 
 const getAuthList = () => {
@@ -19,7 +20,7 @@ export async function setupXWPermission(app: App) {
     //定义一个符合 permissionOptions 接口的对象 
     const options = {
         publicPath, // 系统 publicPath 目录
-        whiteList: WHITE_NAME_LIST, // 路由白名单
+        whiteList, // 路由白名单
         asyncRoutes, // 异步路由
         basicRoutes, // 基础路由
         getAuthList, // 获取用户权限列表

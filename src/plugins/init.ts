@@ -59,7 +59,8 @@ export const initDefineComponent = async (app: App) => {
 }
 
 // 初始化微前端框架
-export const initMicroApp = async () => {
+export const initMicroApp = async (app: App) => {
+    console.log('app ==', app)
     await import("@micro-zoe/micro-app").then(async (microApp: any) => {
         microApp.start({
             lifeCycles: {

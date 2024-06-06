@@ -14,7 +14,7 @@ import {
     initI18n,
     initMicroApp,
     initXWPermission
-} from "@/init"
+} from "@/plugins/init"
 
 const {
     VITE_MULTIPLE_LANGUAGES,
@@ -41,7 +41,7 @@ async function bootstrap() {
     await initDefineComponent(app);
     // 使用 微前端框架 micro-app
     if (VITE_USE_MICRO_APP === 'true') {
-        await initMicroApp();
+        await initMicroApp(app);
     }
     // 使用 路由权限控制
     if (VITE_USE_XW_UI_PERMISSION === 'true') {
