@@ -1,45 +1,16 @@
-import { getAppEnvConfig } from "@/utils/env";
-
-/**
- * 获取 mock 服务地址
- * @returns
- */
-function getMockBaseUrl() {
-  const { VITE_PORT } = getAppEnvConfig();
-  return `http://localhost:${VITE_PORT}`;
-}
-
-function getTvBaseUrl() {
-  const urlMap: { [key: string]: any } = {
-    development: "http://10.118.1.76:19090/pmp-test/",
-    production: "https://rd-mokadisplay.tcl.com/pmp-tv/",
-    test: "http://10.118.1.76:19090/pmp-test/",
-  };
-  return urlMap[process.env.NODE_ENV as string];
-}
-
-function getMNTBaseUrl() {
-  const urlMap: { [key: string]: any } = {
-    development: "http://10.118.1.89:8090/",
-    production: "https://pmp-mokadisplay.tcl.com:8085/",
-    test: "http://10.118.1.89:8090/",
-  };
-  return urlMap[process.env.NODE_ENV as string];
-}
-
-function getLoginUrl() {
-  const urlMap: { [key: string]: any } = {
-    development: "http://10.118.1.89:8086/api/",
-    production: "https://rd-mokadisplay.tcl.com/srdpm-api/api/",
-    test: "http://10.118.1.89:8086/api/",
-  };
-  return urlMap[process.env.NODE_ENV as string];
-}
-
 export default {
-  // 本地 mock 服务
-  MockBaseUrl: getMockBaseUrl(),
-  TvBaseUrl: getTvBaseUrl(),
-  MntBaseUrl: getMNTBaseUrl(),
-  LoginUrl: getLoginUrl(),
-};
+  tokenKey: 'test-token', // token key值，传入token key值，默认使用内部获取方法
+  tokenExpires: 1, // token 过期时间
+  storageType: 'cookie', // 存储token 方法
+  urlPrefix: 'api',
+  refreshTokenConfig: { // token 自动刷新配置
+    url: '/refresh-token', // 刷新 token url
+    interval: 20 * 60 * 1000, // token 刷新时间间隔为 20 分钟
+    tokenExpiresKey: 'test-tokenExpires', // token 过期时间存储 key
+    // refreshIdKey: 'test-refreshIdKey', // 存储 refreshId 刷新 token id 的 key, 选填，不传入则不会向刷新token 接口中传入 refreshId 参数
+    // expires: null, // 登录请求接口中，token 过期时间为空
+    // refreshId: null, // 登录请求接口中，refreshId 刷新 token id 为空
+
+  },
+}
+

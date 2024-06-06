@@ -30,7 +30,7 @@
     "vue": "^3.4.21",
     "vue-i18n": "^9.13.1",
     "vue-router": "^4.3.0",
-    "xw-ui": "^1.0.100"
+    "xw-ui": "^1.0.108"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
@@ -38,6 +38,7 @@
     "@intlify/unplugin-vue-i18n": "^4.0.0",
     "@rushstack/eslint-patch": "^1.8.0",
     "@tsconfig/node20": "^20.1.4",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.12.5",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
