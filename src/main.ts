@@ -24,19 +24,20 @@ const {
 } = getAppEnvConfig()
 
 async function bootstrap() {
-
+    let route = null
+    let store = null
     const app = await initVue();
     await initElementPlus(app);
     // 引入 XW-UI Element Plus
     if (VITE_USE_XW_UI_ELEMENT_PLUS === 'true') {
         await initXWElementPlus(app);
     }
-    await initStore(app);
+    store = await initStore(app);
     // 使用国际化 i18n
     if (VITE_MULTIPLE_LANGUAGES === 'true') {
         await initI18n(app);
     }
-    await initRoute(app);
+    route = await initRoute(app);
     // 加载自定义组件
     await initDefineComponent(app);
     // 使用 微前端框架 micro-app

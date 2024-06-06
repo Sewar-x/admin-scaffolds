@@ -11,6 +11,9 @@ import { reactive } from "vue";
 import { cookieUtils } from "@/plugins/storage";
 import { login } from "@/api/login";
 import requestSetting from "@/settings/requestSetting";
+import { useRouter } from "vue-router";
+const router = useRouter();
+
 interface RuleForm {
   username: string;
   password: string;
@@ -83,11 +86,19 @@ const options: object = {
 };
 
 const submit = async (params: any) => {
-  const { expire, token } = await login(params);
-  // 存储 token, 注意存储的 token key和存储方案需要在 createXhttp 参数相同！
-  cookieUtils.setItem(requestSetting.tokenKey, token);
-  //存储 token 过期时间，注意存储的 token 过期时间和存储方案需要在 createXhttp 参数相同！
-  cookieUtils.setItem(requestSetting.refreshTokenConfig.tokenExpiresKey, expire);
+  try {
+    const { expire, token } = await login(params);
+    console.log("🚀 ~ submit ~  expire, token :", expire, token);
+    // 存储 token, 注意存储的 token key和存储方案需要在 createXhttp 参数相同！
+    cookieUtils.setItem(requestSetting.tokenKey, token);
+    //存储 token 过期时间，注意存储的 token 过期时间和存储方案需要在 createXhttp 参数相同！
+    cookieUtils.setItem(requestSetting.refreshTokenConfig.tokenExpiresKey, expire);
+    router.push({
+      name: "authMenu",
+    });
+  } catch (err) {
+    console.error(err);
+  }
 };
 </script>
 
