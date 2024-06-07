@@ -102,27 +102,3 @@ export const initXWPermission = async (app: App) => {
 
 
 
-// /**
-//  * 解决刷新不触发 router.beforeEach 回调bug
-//  * @returns
-//  */
-// export async function reloadHacker() {
-//     // 按需引入路由，避免全量引入，导致 i18n 与 router 循环引入问题
-//     let { useUserStoreWithOut } = await import("@/stores/modules/common/user");
-//     let { routesStoreWithOut } = await import("@/stores/modules/common/routes");
-//     const userStore = useUserStoreWithOut();
-//     const routeStore = routesStoreWithOut();
-//     if (window.performance.navigation.type === window.performance.navigation.TYPE_RELOAD) {
-//         // 用户进行了刷新动作
-//         try {
-//             let accessRoutes = userStore.getAuthority || {}
-//             if (accessRoutes?.menuNames && accessRoutes?.menuNames?.length === 0) {
-//                 accessRoutes = await userStore.GetAuthority()
-//                 routeStore.GenerateRoutes(accessRoutes?.menuNames || [])
-//             }
-//         } catch (err) {
-
-//             return userStore.Logout()
-//         }
-//     }
-// }
