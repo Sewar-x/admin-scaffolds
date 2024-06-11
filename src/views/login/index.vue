@@ -13,7 +13,6 @@ import { login } from "@/api/login";
 import requestSetting from "@/settings/requestSetting";
 import { useRouter } from "vue-router";
 const router = useRouter();
-import { routesStoreWithOut } from "@/stores/modules/common/routes";
 interface RuleForm {
   username: string;
   password: string;
@@ -95,11 +94,7 @@ const submit = async (params: any) => {
     router.push({
       name: "authMenu1",
     });
-    const routeStore = routesStoreWithOut()
-    const routes = routeStore.getRoutes
-    const AddRoutes = routeStore.getAddRoutes
-    const AdminRoutes = routeStore.getAdminRoutes
-    const sideRouters = routeStore.getSideRouters
+
   } catch (err) {
     console.error(err);
   }

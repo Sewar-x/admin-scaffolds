@@ -13,7 +13,7 @@ import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite' // i18n 预编译
 import { viteMockServe } from 'vite-plugin-mock' // mock 服务
 import UnoCSS from 'unocss/vite'
 import { visualizer } from 'rollup-plugin-visualizer' // vite打包视图分析
-
+import { ViteEjsPlugin } from 'vite-plugin-ejs'
 
 // https://vitejs.dev/config/
 const url = import.meta.url;
@@ -98,6 +98,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
 
         })
         : undefined,
+      ViteEjsPlugin({
+        title: env.VITE_APP_TITLE
+      }),
       UnoCSS()
     ],
     // css 配置
