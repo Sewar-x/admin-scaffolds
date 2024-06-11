@@ -99,6 +99,105 @@
 
 ### xw-ui/permission 插件
 
+xw-ui/permission 插件是使用 vivien-permission 插件，[vivien-permission](https://sewar-x.github.io/X-UI/zh-CN/components/library/vivien-permission/%E4%BD%BF%E7%94%A8.html) 插件是一个基于后台管理系统中的路由菜单权限控制系统，通过 vue-router 全局控制后台管理系统的菜单权限。
+
+**插件功能**：
+
+| 功能             | 介绍                                                     |
+| ---------------- | -------------------------------------------------------- |
+| 菜单路由权限控制 | 通过接口返回权限路由名称，控制当前登录用户的路由权限     |
+| 按钮级别权限控制 | 通过接口返回按钮权限列表名称，控制当前登录用户的按钮权限 |
+| 单点登录         | 使用当前插件的系统和其他系统相互登录                     |
+
+**插件配置**：
+
+在目录 `src/plugins` 目录下新增 `/xw-permission` 目录，存在权限系统相关插件，创建插件初始化方法：
+
+```javascript
+import type { App } from "vue";
+import initPermission from "xw-ui/permission"
+import asyncRoutes from "@/router/asyncRoutes";
+import basicRoutes from "@/router/basicRoutes";
+import whiteList from "@/router/basicRoutes/whiteList";
+import { checkSSOLogin, getAuthList } from "@/api/login"
+import requestSetting from "@/settings/requestSetting"
+
+
+const publicPath = import.meta.env.VITE_BASE_PATH // 系统 publicPath 目录
+export async function setupXWPermission(app: App, router: any) {
+    //定义一个符合 permissionOptions 接口的对象 
+    const options = {
+        router,
+        publicPath, // 系统 publicPath 目录
+        whiteList, // 路由白名单
+        asyncRoutes, // 异步路由
+        basicRoutes, // 基础路由
+        getAuthList, // 获取用户权限列表
+        checkSSOLogin, // 检查oa登录状态
+        storageType: requestSetting.storageType,// 本地数据存储类型
+        TOKEN_KEY: requestSetting.tokenKey, // token 存储 key 值
+        SSO_TOKEN_KEYS: ['SIAMTGT', 'SIAMJWT'], //单点登录相关 token
+
+    }
+    await initPermission(app, options, (params: any) => {
+        console.log('权限初始化完成===', params)
+        getCallback(params)
+    })
+}
+
+async function getCallback(params: any) {
+    if (!params) return null
+    console.log("🚀 ~permission getCallback:", params)
+}
+
+```
+
+该方法提供插件相关初始化函数。
+
+>  插件配置文档：[permission 插件 | XW-UI (sewar-x.github.io)](https://sewar-x.github.io/X-UI/zh-CN/components/library/vivien-permission/使用.html#配置)
+
+
+
+**引入插件插件：**
+
+在 `src/plugins/init.ts` 中动态引入插件：
+
+```javascript
+// 使用路由权限控制
+export const initXWPermission = async (app: App) => {
+    return await import("@/plugins/xw-permission/index").then(async (XWUI: any) => {
+        XWUI.setupXWPermission(app);
+        return XWUI
+    });
+}
+```
+
+
+
+在 `src/main.ts` 文件中添加插件初始化方法：
+
+```javascript
+    // 使用 路由权限控制
+    if (VITE_USE_XW_UI_PERMISSION === 'true') {
+        await initXWPermission(app);
+    }
+```
+
+
+
+**使用插件**：
+
+在 `src/.env` 文件中，添加配置 `VITE_USE_XW_UI_PERMISSION=true`： 
+
+```shell
+# 是否使用路由权限控制
+VITE_USE_XW_UI_PERMISSION=true
+```
+
+如果你想关闭该插件使用，使 `VITE_USE_XW_UI_PERMISSION=false` 即可。 
+
+
+
 
 
 ### Element-Plus 插件

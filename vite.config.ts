@@ -44,7 +44,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     VITE_DEV_PORT,
     VITE_USE_MICRO_APP
   } = viteEnv;
-
   return {
     base: VITE_BASE_PATH,
     plugins: [
@@ -82,7 +81,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       // eslint 格式化
       EslintPlugin({
         cache: false,
-        include: ['src/**/*.vue', 'src/**/*.ts', 'src/**/*.tsx'] // 检查的文件
+        include: ['src/**/*.vue', 'src/**/*.ts', 'src/**/*.tsx', 'mock/**/*.ts'] // 检查的文件
       }),
       // i18n 预编译
       VueI18nPlugin({
@@ -91,17 +90,12 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         include: [resolve(__dirname, 'src/locales/**')]
       }),
       // 是否开启 Mock 服务
-      VITE_USE_MOCK === 'true'
+      VITE_USE_MOCK
         ? viteMockServe({
           ignore: /^\_/,
           mockPath: 'mock',
-          localEnabled: !isBuild,
-          prodEnabled: isBuild,
-          injectCode: `
-          import { setupProdMockServer } from '../mock/_createProductionServer'
+          supportTs: true, // 默认为 false，如果你的 mock 文件是 .ts 后缀，需要改为 true  
 
-          setupProdMockServer()
-          `
         })
         : undefined,
       UnoCSS()

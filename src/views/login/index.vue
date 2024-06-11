@@ -94,7 +94,7 @@ const submit = async (params: any) => {
     //存储 token 过期时间，注意存储的 token 过期时间和存储方案需要在 createXhttp 参数相同！
     cookieUtils.setItem(requestSetting.refreshTokenConfig.tokenExpiresKey, expire);
     router.push({
-      name: "authMenu",
+      name: "authMenu1",
     });
   } catch (err) {
     console.error(err);

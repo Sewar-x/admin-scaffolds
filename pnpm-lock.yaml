@@ -36,8 +36,8 @@ importers:
         specifier: ^4.3.0
         version: 4.3.2(vue@3.4.27(typescript@5.4.5))
       xw-ui:
-        specifier: ^1.0.121
-        version: 1.0.121
+        specifier: ^1.0.122
+        version: 1.0.122
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.3.0
@@ -3471,8 +3471,8 @@ packages:
     resolution: {integrity: sha512-ICP2e+jsHvAj2E2lIHxa5tjXRlKDJo4IdvPvCXbXQGdzSfmSpNVyIKMvoZHjDY9DP0zV17iI85o90vRFXNccRw==}
     engines: {node: '>=12'}
 
-  xw-ui@1.0.121:
-    resolution: {integrity: sha512-QBedsqBopzD0MZixQKcQRVRH8l5xh5hl9wxVUJnCpDGeEUDqNt91b5MnRprTxmnESkTTBXDGSBE6T+iuKWa05g==}
+  xw-ui@1.0.122:
+    resolution: {integrity: sha512-B8wV7V7u/VNPeBBP5YPUMPq4mQEcWOa2T/FBzMFFFcMBOJN6HAhhGwGbbcbmh34mYvuOEGkoBKA/s22LuMndyQ==}
 
   y18n@5.0.8:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}
@@ -7206,7 +7206,7 @@ snapshots:
 
   xml-name-validator@4.0.0: {}
 
-  xw-ui@1.0.121:
+  xw-ui@1.0.122:
     dependencies:
       '@types/lodash': 4.17.4
       lodash-es: 4.17.21

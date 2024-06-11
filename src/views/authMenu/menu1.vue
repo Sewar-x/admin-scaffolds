@@ -1,5 +1,5 @@
 <template>
-  <div>权限菜单</div>
+  <div>权限菜单1</div>
 </template>
 
 <style scoped></style>
