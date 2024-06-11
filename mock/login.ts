@@ -6,6 +6,7 @@ export default [
         method: 'post',
         response: (params) => {
             console.log("🚀登录接口  /api/login :",params)
+            const expire = new Date().getTime() + 20 * 60 * 1000
             return {
                 'code': 200,
                 'message': '获取账号成功',
@@ -13,7 +14,7 @@ export default [
                     'name': 'xxxxx',
                                 'id': 111,
                                 'token': '1222222xxxxxxxxxxxxxxxxxxxxxxx',
-                                'expire': 1718084268052 + 20 * 60 * 1000,
+                                'expire': expire,
                                 'userInfo': {
                                     'id': 1,
                                     'name': '张三'

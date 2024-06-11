@@ -5,7 +5,7 @@ import basicRoutes from "@/router/basicRoutes";
 import whiteList from "@/router/basicRoutes/whiteList";
 import { checkSSOLogin, getAuthList } from "@/api/login"
 import requestSetting from "@/settings/requestSetting"
-
+import { routesStoreWithOut } from "@/stores/modules/common/routes";
 
 const publicPath = import.meta.env.VITE_BASE_PATH // 系统 publicPath 目录
 export async function setupXWPermission(app: App, router: any) {
@@ -24,12 +24,10 @@ export async function setupXWPermission(app: App, router: any) {
 
     }
     await initPermission(app, options, (params: any) => {
-        console.log('权限初始化完成===', params)
-        getCallback(params)
+        if (!params) return null
+        console.log("🚀 ~permission params:",params)
+        const routeStore = routesStoreWithOut()
+        routeStore.initPermissionInst(params)
     })
 }
 
-async function getCallback(params: any) {
-    if (!params) return null
-    console.log("🚀 ~permission getCallback:", params)
-}

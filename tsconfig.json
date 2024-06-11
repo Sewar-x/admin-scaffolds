@@ -21,20 +21,27 @@
   ],
   "compilerOptions": {
     //配置编译选项
-    "diagnostics": true, // 打印诊断信息
-    "removeComments": true, //移除代码中注释
-    "strictNullChecks": true, //开启null、undefined检测
-    "baseUrl": ".", // 解析非相对模块的基地址，默认是当前目录
+    "target": "esnext",
+    "useDefineForClassFields": true,
     "module": "esnext",
-    "target": "esnext", // 目标语言的版本
-    "moduleResolution": "node", // 模块解析策略，ts默认用node的解析策略，即相对的方式导入
-    "allowJs": false, // 允许编译器编译JS，JSX文件
-    "checkJs": false, // 允许在JS文件中报错，通常与allowJS一起使用
-    "sourceMap": true, // 生成目标文件的sourceMap文件
-    "strict": true, // 开启所有严格的类型检查
-    "noUnusedLocals": true, // 检查只声明、未使用的局部变量(只提示不报错)
-    "noUnusedParameters": true, // 检查未使用的函数参数(只提示不报错)
-    "esModuleInterop": true, // 允许export=导出，由import from 导入
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "jsxImportSource": "vue",
+    "lib": ["esnext", "dom"],
+    "baseUrl": "./",
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "strictFunctionTypes": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
     "paths": {
       // 路径映射，相对于baseUrl
       "@/*": [
@@ -43,9 +50,9 @@
       "#/*": [
         "./types/*"
       ],
-      "$locale": [
-        "./src/locales/setupLocale.ts"
-      ],
+      // "$locale": [
+      //   "./src/locales/setupLocale.ts"
+      // ],
       "$store/*": [
         "./src/stores/modules/*"
       ],
@@ -54,10 +61,13 @@
       ]
     },
     // "suppressImplicitAnyIndexErrors": true,
-    "jsx": "preserve",
     "types": [
       "node",
-      "vite/client"
+      "vite/client",
+      "@intlify/unplugin-vue-i18n/types",
+      "vite/client",
+      "element-plus/global",
+      "vite-plugin-svg-icons/client"
     ] //默认所有可见的”@types“包会在编译过程中被包含进来。 node_modules/@types文件夹下以及它们子文件夹下的所有包都是可见的；如果指定了types，只有被列出来的包才会被包含进来
   }
 }

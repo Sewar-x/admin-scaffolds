@@ -10,12 +10,20 @@ export default {
     },
     children: [
         {
-            path: '/authMenu1',
-            component: () => import("@/views/authMenu/menu1.vue"),
-            name: 'authMenu1',
-            meta: {
-              hidden: false,
-            }
+          path: '/authMenu1',
+          component: () => import("@/views/authMenu/menu1.vue"),
+          name: 'authMenu1',
+          meta: {
+            hidden: false,
           }
+        },
+        {
+          path: '/authMenu2',
+          component: () => import("@/views/authMenu/menu2.vue"),
+          name: 'authMenu2',
+          meta: {
+            hidden: false,
+          }
+        }
     ]
 }

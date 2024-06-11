@@ -127,10 +127,10 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     build: {
       target: "esnext",
       outDir: VITE_OUT_DIR || 'dist',
-      sourcemap: VITE_SOURCEMAP === 'true',
+      sourcemap: VITE_SOURCEMAP,
       // brotliSize: false,
       rollupOptions: {
-        plugins: VITE_USE_BUNDLE_ANALYZER === 'true' ? [visualizer()] : undefined,
+        plugins: VITE_USE_BUNDLE_ANALYZER? [visualizer()] : undefined,
         // 拆包
         output: {
           chunkFileNames: (chunkInfo: any) => buildChunkFile(chunkInfo, VITE_ASSETS_DIR),
