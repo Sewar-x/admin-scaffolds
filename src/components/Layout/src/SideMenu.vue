@@ -15,9 +15,10 @@ import { XMenu } from "xw-ui/element-plus";
 import { useSideMenu } from "../hooks/useMenu.ts";
 import { routesStoreWithOut } from "@/stores/modules/common/routes";
 import { useRouter } from "vue-router";
-const router = useRouter()
+const router = useRouter();
 const props = defineProps({
   layoutMode: String,
+  defaultActive: String,
 });
 
 const userStore = routesStoreWithOut();
@@ -27,6 +28,7 @@ const options = useSideMenu({
   routes: userStore.getRoutes,
   asyncRoutes: userStore.getAddRoutes,
   asyncSideRoutes: userStore.getAdminRoutes,
+  defaultActive: props.defaultActive,
 });
 </script>
 

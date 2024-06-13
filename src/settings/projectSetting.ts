@@ -9,7 +9,8 @@ const setting: ProjectConfig = {
   loadOnDemandEl: VITE_USE_ALL_ELEMENT_PLUS_STYLE != 'true',
   // element ui size
   elementSize: "mini",
-  layoutMode: "top", //'top' | 'aside' | 'topAside' | 'none'
+  layoutMode: "aside", //'top' | 'aside' | 'topAside' | 'none'
+  defaultActive: 'authMenu1' // 默认首页路由名称
 };
 
 export default setting;

@@ -1,12 +1,18 @@
 <template>
-  <div class="layout-container" v-if="layoutMode !== 'none'">
+  <div
+    v-if="layoutMode !== 'none'"
+    class="layout-container"
+    :class="[`layout-${layoutMode}-container`]"
+  >
     <SideMenu
+      class="layout-side-menu"
       v-if="layoutMode === 'aside' || layoutMode === 'topAside'"
       :layoutMode="layoutMode"
+      :default-active="ProjectConfig.defaultActive"
     />
     <div class="layout-content-container">
       <el-header class="header" v-if="layoutMode === 'top' || layoutMode === 'topAside'">
-        <TopMenu :layoutMode="layoutMode" />
+        <TopMenu :layoutMode="layoutMode" class="layout-top-menu" />
       </el-header>
       <el-main class="layout-content-main">
         <router-view />
@@ -36,5 +42,28 @@ const layoutMode = ProjectConfig.layoutMode;
   :deep(.xw-ui-menus-header) {
     height: 60px;
   }
+}
+.layout-aside-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  .layout-content-container {
+    width: 100%;
+  }
+}
+.layout-top-container {
+  .layout-content-container {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    height: 100%;
+    .layout-content-main {
+      height: 100%;
+    }
+  }
+}
+.layout-topAside-container {
+}
+.layout-none-container {
 }
 </style>

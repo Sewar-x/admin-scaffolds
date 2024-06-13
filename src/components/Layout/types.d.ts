@@ -7,5 +7,6 @@ export interface useSideMenuType {
     routes?: Array<any>,
     asyncRoutes?: Array<any>,
     asyncSideRoutes?: Array<any>,
-    layoutMode: String
+    layoutMode: String,
+    defaultActive: String,
   }

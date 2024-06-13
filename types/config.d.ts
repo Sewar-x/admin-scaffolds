@@ -10,6 +10,7 @@ export interface ProjectConfig {
   elementSize: string;
     // 布局模式
   layoutMode: 'top' | 'aside' | 'topAside' | 'none';
+  defaultActive: string// 默认首页路由名称
 }
 
 export interface LocaleSetting {

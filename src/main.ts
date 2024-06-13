@@ -39,6 +39,11 @@ async function bootstrap() {
     if (VITE_USE_XW_UI_PERMISSION === 'true') {
         await initXWPermission(app);
     }
+    // 使用 微前端框架 micro-app
+    if (VITE_USE_MICRO_APP === 'true') {
+        await initMicroApp(app);
+    }
+        
     // 加载自定义组件
     await initDefineComponent(app);
 
@@ -47,11 +52,7 @@ async function bootstrap() {
         await initXWElementPlus(app);
     }
 
-    // 使用 微前端框架 micro-app
-    if (VITE_USE_MICRO_APP === 'true') {
-        await initMicroApp(app);
-    }
-    
+
 
     app.mount("#app");
 }
