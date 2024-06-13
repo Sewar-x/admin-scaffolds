@@ -8,6 +8,8 @@ export interface ProjectConfig {
   loadOnDemandEl: boolean;
   // element ui size
   elementSize: string;
+    // 布局模式
+  layoutMode: 'top' | 'aside' | 'topAside' | 'none';
 }
 
 export interface LocaleSetting {
@@ -18,5 +20,6 @@ export interface LocaleSetting {
   fallback: LocaleType;
   // available Locales
   availableLocales: LocaleType[];
+
 }
 

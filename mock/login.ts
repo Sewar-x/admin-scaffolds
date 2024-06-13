@@ -43,7 +43,7 @@ export default [
                 'code': 200,
                 'message': '🚀获取用户权限列表成功',
                 'result': {
-                    menuNames: ["authMenu1"], // 菜单权限名称列表
+                    menuNames: ["authMenus","authMenu1","authMenu2"], // 菜单权限名称列表
                     rule: [],// 按钮级别权限
                 }
             }

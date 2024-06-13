@@ -6,9 +6,9 @@
 
   --left-menu-min-width: 64px;
 
-  --left-menu-bg-color: #001529;
+  --left-menu-bg-color: rgba(255, 255, 255, 0.861);
 
-  --left-menu-bg-light-color: #0f2438;
+  --left-menu-bg-light-color: rgba(255, 255, 255, 0.975);
 
   --left-menu-bg-active-color: var(--el-color-primary);
 

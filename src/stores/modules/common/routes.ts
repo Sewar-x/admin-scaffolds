@@ -21,19 +21,20 @@ export const useRoutesStore = defineStore({
   getters: {
     // 所有路由
     getRoutes(): Array<RouteItem> {
-      return this.permissionInst?.getRoutes()
+      console.log('===permissionInst===',this.permissionInst)
+      return  this.permissionInst? this.permissionInst?.getRoutes() : null
     },
     // 异步路由
     getAddRoutes(): Array<RouteItem> {
-      return this.permissionInst?.getAddRoutes()
+      return this.permissionInst?.getAddRoutes()|| null
     },
     // 获取后台管理路由
     getAdminRoutes(): Array<RouteItem | null> {
-      return this.permissionInst?.getAsyncRoutes()
+      return this.permissionInst?.getAsyncRoutes()|| null
     },
     // 二级菜单展示路由
     getSideRouters(): RouteItem | Object {
-      return this.permissionInst?.getShowRouters()
+      return this.permissionInst?.getShowRouters() || null
     }
   },
 

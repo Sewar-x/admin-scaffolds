@@ -29,8 +29,8 @@ dependencies:
     specifier: ^4.3.0
     version: 4.3.3(vue@3.4.27)
   xw-ui:
-    specifier: ^1.0.125
-    version: 1.0.125
+    specifier: ^1.0.132
+    version: 1.0.132
 
 devDependencies:
   '@commitlint/cli':
@@ -6650,8 +6650,8 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /xw-ui@1.0.125:
-    resolution: {integrity: sha512-XwCv6Yu42GY+LPWICoz09Edb5FYlfMhbX3fwCT08vFNU36K6XlBLVzX6LoeHEvX8jDTx5Sq4hxEnsGL605uoUw==}
+  /xw-ui@1.0.132:
+    resolution: {integrity: sha512-CYzDe1Z1I0bYmdGz4h3+TqLNhK2zAJQhmY0RVgMoQUXsxTcOusOkALvAG3b6ELPHGAq1SoqorANAAghFSkCmKA==}
     dependencies:
       '@types/lodash': 4.17.5
       lodash-es: 4.17.21

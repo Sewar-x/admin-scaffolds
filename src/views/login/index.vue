@@ -94,7 +94,7 @@ const submit = async (params: any) => {
     router.push({
       name: "authMenu1",
     });
-
+    
   } catch (err) {
     console.error(err);
   }
