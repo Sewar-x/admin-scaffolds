@@ -8,7 +8,6 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import progress from 'vite-plugin-progress' // vite 打包进度插件
 import { createStyleImportPlugin, ElementPlusResolve } from 'vite-plugin-style-import' // element plus 按需引入
-import EslintPlugin from 'vite-plugin-eslint' // vite eslint 格式化插件
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite' // i18n 预编译
 import { viteMockServe } from 'vite-plugin-mock' // mock 服务
 import UnoCSS from 'unocss/vite'
@@ -24,7 +23,6 @@ const root = process.cwd()
 // https://vitejs.dev/config/
 export default ({ command, mode }: ConfigEnv): UserConfig => {
 
-  const isBuild = command === 'build'
   // 加载 root 中的 .env 文件。根据执行命令的环境类型获取变量
   const env = loadEnv(mode, root);
   // loadEnv读取的布尔类型是一个字符串。这个函数可以转换为布尔类型
@@ -78,11 +76,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           ]
         })
         : undefined,
-      // eslint 格式化
-      EslintPlugin({
-        cache: false,
-        include: ['src/**/*.vue', 'src/**/*.ts', 'src/**/*.tsx', 'mock/**/*.ts'] // 检查的文件
-      }),
+    
+
       // i18n 预编译
       VueI18nPlugin({
         runtimeOnly: true,

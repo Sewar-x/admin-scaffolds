@@ -9,67 +9,35 @@ export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
   return src;
 }
 
-export function deepClone(target: any) {
-  const map = new WeakMap();
-
-  function isObject(target: any) {
-    return (typeof target === "object" && target) || typeof target === "function";
-  }
-
-  function clone(data: any) {
-    if (!isObject(data)) {
-      return data;
+/**
+ * 深拷贝
+ * @param target 
+ * @returns 
+ */
+export function deepClone(obj: any) {
+    //基本类型和null是不可变的，无需进行深拷贝
+    if (typeof obj !== 'object' || obj === null) {
+      return obj;
     }
-    if ([Date, RegExp].includes(data.constructor)) {
-      return new data.constructor(data);
-    }
-    if (typeof data === "function") {
-      return new Function("return " + data.toString())();
-    }
-    const exist = map.get(data);
-    if (exist) {
-      return exist;
-    }
-    if (data instanceof Map) {
-      const result = new Map();
-      map.set(data, result);
-      data.forEach((val, key) => {
-        if (isObject(val)) {
-          result.set(key, clone(val));
-        } else {
-          result.set(key, val);
-        }
-      });
-      return result;
-    }
-    if (data instanceof Set) {
-      const result = new Set();
-      map.set(data, result);
-      data.forEach((val) => {
-        if (isObject(val)) {
-          result.add(clone(val));
-        } else {
-          result.add(val);
-        }
-      });
-      return result;
-    }
-    const keys = Reflect.ownKeys(data);
-    const allDesc = Object.getOwnPropertyDescriptors(data);
-    const result = Object.create(Object.getPrototypeOf(data), allDesc);
-    map.set(data, result);
-    keys.forEach((key) => {
-      const val = data[key];
-      if (isObject(val)) {
-        result[key] = clone(val);
-      } else {
-        result[key] = val;
+    
+    let copy;
+    
+    if (Array.isArray(obj)) {
+      copy = [];
+      for (let i = 0; i < obj.length; i++) {
+        copy[i] = deepClone(obj[i]);//递归调用deepCopy函数来对对象的每个属性进行深拷贝
       }
-    });
-    return result;
-  }
-
-  return clone(target);
+    } else {
+      copy = {};
+      for (let key in obj) {
+        //在遍历对象属性时，通过hasOwnProperty方法来确保只复制对象自身的属性，而不包括继承的属性。
+        if (obj.hasOwnProperty(key)) {
+          copy[key] = deepClone(obj[key]);//递归调用deepCopy函数来对对象的每个属性进行深拷贝
+        }
+      }
+    }
+    
+    return copy;
 }
 
 /**
@@ -81,19 +49,6 @@ export function toUpper(val: string) {
   return str.replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
 }
 
-/**
- * 返回渲染组件
- */
-export function renderComp(val: number): string {
-  const comp: Recordable = {
-    1: "el-input",
-    2: "el-select",
-    3: "el-upload",
-    4: "el-radio-group",
-    5: "el-checkbox-group",
-  };
-  return comp[val];
-}
 
 
 /**
@@ -265,8 +220,8 @@ export function saveFile(blob: any, fileName?: string) {
  * @returns
  */
 export function getChildValue(
-  data: Array<T> = [],
-  arr: Array<T> = [],
+  data: Array<any> = [],
+  arr: Array<any> = [],
   key: string = '',
   children: string = 'children'
 ) {
