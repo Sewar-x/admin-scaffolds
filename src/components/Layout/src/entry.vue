@@ -63,6 +63,16 @@ const layoutMode = ProjectConfig.layoutMode;
   }
 }
 .layout-topAside-container {
+  display: flex;
+  .layout-content-container {
+    width: 100%;
+    .header {
+      padding: 0;
+      :deep(.el-header) {
+        padding: 0;
+      }
+    }
+  }
 }
 .layout-none-container {
 }

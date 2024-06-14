@@ -184,6 +184,7 @@ function generateTopMenuConfig({
   })
   options.attr['mode'] = 'horizontal'
   options.attr['popper-offset'] = 20
+  delete options.collapse 
   options.event['select'] =  (name: string) => {
     generateAsideMenuConfig({
       routeInst,
