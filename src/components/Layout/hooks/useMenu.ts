@@ -1,7 +1,8 @@
 import { ref, watch } from 'vue'
 import type { useSideMenuType } from '../types.d.ts'
 import { deepClone } from "@/utils/index"
-
+import { routesStoreWithOut } from "@/stores/modules/common/routes";
+const routeStore = routesStoreWithOut()
 import {
     Document,
     Expand,
@@ -196,6 +197,7 @@ function generateTopMenuConfig({
   }
   setDefaultActive(routeInst,defaultActive as string,options)
   topMenuOptions.value = options
+  routeStore.SetTopRouters(topMenuOptions.value)
   console.log("🚀 ~ 生成顶部菜单配置====", topMenuOptions.value)
 }
 
@@ -225,7 +227,8 @@ function generateAsideMenuConfig({
   options.event['select'] =  (name: string) => {
     routeInst.push({name})
   }
-  sideMenuOptions.value = options
+  sideMenuOptions.value = deepClone(options)
+  routeStore.SetSideRouters(sideMenuOptions.value)
   console.log("🚀 ~ 生成侧边菜单配置====", sideMenuOptions.value)
 }
 
