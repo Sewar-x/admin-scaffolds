@@ -1,15 +1,49 @@
 import { ref, type Ref} from 'vue'
 import type { useSideMenuType } from '../types.d.ts'
+import type { RouteItem } from 'vue-router';
 import { deepClone } from "@/utils/index"
 import { isEmpty } from "@/utils/is"
-import { routesStoreWithOut } from "@/stores/modules/common/routes";
-const routeStore = routesStoreWithOut()
 import {
     Document,
     Expand,
     Fold,
   } from "@element-plus/icons-vue";
   
+class Menus {
+  public topRoutes =  {}
+  public sideRoutes = {}
+
+  // 一级菜单展示路由
+  getTopRouters(): RouteItem | Object {
+    return this.topRoutes
+  }
+  // 二级菜单展示路由
+  getSideRouters(): RouteItem | Object {
+    return this.sideRoutes
+  }
+  /**
+   * 设置一级菜单显示的路由
+   * @param {} param0
+   * @param {*} routes 当前路由对象，包含路由名称 name 或则路由路径
+   * @returns
+   */
+  SetTopRouters(routes: RouteItem) {
+    this.topRoutes = routes
+  }
+  /**
+ * 设置二级菜单显示的路由
+ * @param {} param0
+ * @param {*} routes 当前路由对象，包含路由名称 name 或则路由路径
+ * @returns
+ */
+  SetSideRouters(routes: RouteItem) {
+    this.sideRoutes = routes
+  }
+}
+
+const routeStore = new Menus()
+
+
 // from 表单配置项
 const menuConfig = {
     attr: {
@@ -187,7 +221,7 @@ function generateTopMenuConfig({
   topMenuOptions,
   sideMenuOptions
 }:useSideMenuType){
-  const topMenus = routeStore.getTopRouters
+  const topMenus = routeStore.getTopRouters()
   if(!isEmpty(topMenus)){
     console.log("🚀 生成顶部栏函数，顶部菜单栏不是空，直接返回:")
     topMenuOptions.value  = topMenus
@@ -239,7 +273,7 @@ function generateAsideMenuConfig({
   layoutMode,
   defaultActive,
 }:useSideMenuType){
-  const topMenus = routeStore.getTopRouters
+  const topMenus = routeStore.getTopRouters()
   if(isEmpty(topMenus)){
     console.log("🚀 生成侧边栏函数，顶部菜单栏为空，生成顶部菜单:")
 

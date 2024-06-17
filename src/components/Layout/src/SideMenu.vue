@@ -1,5 +1,5 @@
 <template>
-  <XMenu key="sideMenu" :options="configs">
+  <XMenu key="sideMenu" :options="sideMenuOptions">
     <template #header>
       <img class="logo" :src="Logo" />
     </template>
@@ -23,8 +23,8 @@ const props = defineProps({
   defaultActive: String,
 });
 
-let configs: Ref = ref({})
-useMenu({
+
+const { sideMenuOptions } = useMenu({
   type: 'side',
   routeInst: router,
   layoutMode: props.layoutMode,
@@ -33,14 +33,15 @@ useMenu({
   asyncSideRoutes: routeStore.getAdminRoutes,
   defaultActive: props.defaultActive,
 });
+console.log('====侧边栏组件配置====',sideMenuOptions)
     //监听顶部菜单栏变化
   watch(
-    () => routeStore.getSideRouters,
+    () => sideMenuOptions.value,
     (newValue) => {
 
       if(!newValue) {
         console.log('===🚀侧边栏菜单变化🚀====',newValue)
-        configs.value = newValue
+      
       }
     },
     { deep: true, immediate: true }

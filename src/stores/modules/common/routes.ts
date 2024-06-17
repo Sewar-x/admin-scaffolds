@@ -8,17 +8,13 @@ interface routesState {
   routes: Array<RouteItem>;
   addRoutes: Array<RouteItem>;
   adminRoutes: Array<RouteItem>;
-  topRoutes: Array<RouteItem> | Object;
-  sideRoutes: Array<RouteItem> | Object;
 }
 
 export const useRoutesStore = defineStore({
   id: "routes-store",
 
   state: (): routesState => ({
-    permissionInst: {}, // 路由权限对象
-    topRoutes: {},
-    sideRoutes: {}
+    permissionInst: {} // 路由权限对象
   }),
 
   getters: {
@@ -34,14 +30,6 @@ export const useRoutesStore = defineStore({
     // 获取后台管理路由
     getAdminRoutes(): Array<RouteItem | null> {
       return this.permissionInst?.getAsyncRoutes()|| null
-    },
-    // 一级菜单展示路由
-    getTopRouters(): RouteItem | Object {
-      return this.topRoutes
-    },
-    // 二级菜单展示路由
-    getSideRouters(): RouteItem | Object {
-      return this.sideRoutes
     }
   },
 
@@ -64,28 +52,7 @@ export const useRoutesStore = defineStore({
     },    // 生成异步路由
     GenerateRoutes(routesMenuNames: Array<RouteItem>) {
       this.permissionInst?.GenerateRoutes(routesMenuNames)
-    },
-
-    /**
-     * 设置一级菜单显示的路由
-     * @param {} param0
-     * @param {*} routes 当前路由对象，包含路由名称 name 或则路由路径
-     * @returns
-     */
-    SetTopRouters(routes: RouteItem) {
-      this.topRoutes = routes
-    },
-
-    /**
-     * 设置二级菜单显示的路由
-     * @param {} param0
-     * @param {*} routes 当前路由对象，包含路由名称 name 或则路由路径
-     * @returns
-     */
-    SetSideRouters(routes: RouteItem) {
-      this.sideRoutes = routes
     }
-
   },
 });
 
