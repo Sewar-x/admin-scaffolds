@@ -1,6 +1,19 @@
 <template>
-  <div class="login-panel">
-    <XForm :options="options"></XForm>
+  <div class="login-container">
+    <el-card class="login-panel">
+      <template #header>
+        <div class="card-header">
+          <span>登录</span>
+        </div>
+      </template>
+      <XForm :options="options"></XForm>
+      <template #footer>
+        <div class="footer">
+          <el-button type="plain" link disabled> 其他登录方式 </el-button>
+          <el-button type="danger" link disabled> 忘记密码 </el-button>
+        </div>
+      </template>
+    </el-card>
   </div>
 </template>
 
@@ -25,11 +38,11 @@ let data = reactive<RuleForm>({
 });
 
 const rules = reactive<FormRules<RuleForm>>({
-  username: [{ required: true, message: "Please input  name", trigger: "blur" }],
+  username: [{ required: true, message: "请输入账号", trigger: "blur" }],
   password: [
     {
       required: true,
-      message: "Please input description",
+      message: "请输入密码",
       trigger: "change",
     },
   ],
@@ -38,7 +51,7 @@ const rules = reactive<FormRules<RuleForm>>({
 const options: object = {
   mode: data,
   attr: {
-    "label-width": "100px",
+    "label-width": "50px",
     rules: rules,
   },
   items: [
@@ -67,10 +80,17 @@ const options: object = {
 
     [
       {
+        attr: {
+          class: "login-button-container",
+        },
         component: {
           comp: "el-button",
           content: {
             text: "提交",
+          },
+          attr: {
+            class: "login-button",
+            type: "primary",
           },
           event: {
             submit: (val: any) => {
@@ -94,11 +114,33 @@ const submit = async (params: any) => {
     router.push({
       name: "authMenu1",
     });
-    
   } catch (err) {
     console.error(err);
   }
 };
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.login-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .login-panel {
+    width: 500px;
+    height: 300px;
+    :deep(.el-form-item__label) {
+      padding: 0 15px !important;
+    }
+
+    :deep(.login-button) {
+      width: 100%;
+    }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+</style>

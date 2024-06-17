@@ -49,7 +49,8 @@ export default [
                         "authMenu2",
                         'asyncMenus',
                         'asyncMenu1',
-                        'asyncMenu2'
+                        'asyncMenu2',
+                        'asyncMenu3'
                     ], // 菜单权限名称列表
                     rule: [],// 按钮级别权限
                 }

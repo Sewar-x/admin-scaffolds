@@ -40,8 +40,9 @@ useMenu({
   watch(
     () => routeStore.getSideRouters,
     (newValue) => {
-      console.log('===侧边栏菜单变化====',newValue)
+     
       if(!newValue) {
+        console.log('===侧边栏菜单变化====',newValue)
         configs.value = newValue
       }
     },
