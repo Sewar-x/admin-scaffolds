@@ -1,5 +1,5 @@
 <template>
-  <XMenu key="sideMenu" :options="sideMenuOptions">
+  <XMenu key="sideMenu" :options="config">
     <template #header>
       <img class="logo" :src="Logo" />
     </template>
@@ -12,17 +12,16 @@
 <script setup lang="ts">
 import Logo from "/logo.svg";
 import { XMenu } from "xw-ui/element-plus";
-import { useMenu } from "../hooks/useMenu.ts";
+import { useMenu,menuStore } from "../hooks/useMenu.ts";
 import { routesStoreWithOut } from "@/stores/modules/common/routes";
 import { useRouter } from "vue-router";
-import { ref, watch, type Ref } from 'vue'
+import { ref, computed , type Ref } from 'vue'
 const routeStore = routesStoreWithOut()
 const router = useRouter();
 const props = defineProps({
   layoutMode: String,
   defaultActive: String,
 });
-
 
 const { sideMenuOptions } = useMenu({
   type: 'side',
@@ -33,19 +32,10 @@ const { sideMenuOptions } = useMenu({
   asyncSideRoutes: routeStore.getAdminRoutes,
   defaultActive: props.defaultActive,
 });
-console.log('====侧边栏组件配置====',sideMenuOptions)
-    //监听顶部菜单栏变化
-  watch(
-    () => sideMenuOptions.value,
-    (newValue) => {
+  console.log('====侧边栏组件配置 sideMenuOptions====',sideMenuOptions)
+  console.log('====侧边栏组件配置 menuStore====',menuStore)
 
-      if(!newValue) {
-        console.log('===🚀侧边栏菜单变化🚀====',newValue)
-      
-      }
-    },
-    { deep: true, immediate: true }
-  );
+const config = computed(()=> sideMenuOptions.value)
 </script>
 
 <style scoped lang="less">

@@ -1,5 +1,5 @@
 import { ref, type Ref} from 'vue'
-import type { useSideMenuType } from '../types.d.ts'
+import type { useSideMenuType,LayoutType } from '../types.d.ts'
 import type { RouteItem } from 'vue-router';
 import { deepClone } from "@/utils/index"
 import { isEmpty } from "@/utils/is"
@@ -40,60 +40,66 @@ class Menus {
   }
 }
 
-const routeStore = new Menus()
+// 顶部路由和侧边栏路由对象
+export const menuStore = new Menus()
+let topMenuOptions: Ref = ref({}) // 顶部菜单栏配置
+let sideMenuOptions: Ref = ref({}) // 侧边栏菜单配置
+let _layoutMode: LayoutType = 'aside'
+let _routeInstance: any  = null
+let _allRoutes: Array<any> =  []
+let _asyncRoutes: Array<any>  = []
+let _asyncSideRoutes: Array<any> = []
+let _defaultTopActive: String = ''
 
 
 // from 表单配置项
 const menuConfig = {
-    attr: {
-      class: "layout-menu",
-      "active-text-color": "#ffd04b",
-      collapse: false,
-    }, // el-menu的属性对象
-  
-    collapse: {
-      type: "Icon",
-      showIcon: Fold,
-      colseIcon: Expand,
-      size: 20,
-      opendWidth: 200,
-      closeWidth: 60,
-    }, // 折叠按钮
-    event: {}, // el-menu的事件对象
-    ref: ref(), // el-menu组件的实例对象
-  };
+  attr: {
+    class: "layout-menu",
+    "active-text-color": "#ffd04b",
+    collapse: false,
+  }, // el-menu的属性对象
+
+  collapse: {
+    type: "Icon",
+    showIcon: Fold,
+    colseIcon: Expand,
+    size: 20,
+    opendWidth: 200,
+    closeWidth: 60,
+  }, // 折叠按钮
+  event: {}, // el-menu的事件对象
+  ref: ref(), // el-menu组件的实例对象
+};
 
 
-
-const useMenu = ({
-  type,
-  routeInst,
-  routes,
-  asyncRoutes,
-  asyncSideRoutes,
-  layoutMode,
-  defaultActive,
- 
+const useMenu = ({     
+  type = 'side',
+  routeInst = {},
+  routes= [],
+  asyncRoutes = [],
+  asyncSideRoutes= [],
+  layoutMode = 'aside',
+  defaultActive = '',
 }:useSideMenuType) => {
-  let topMenuOptions: Ref = ref({})
-  let sideMenuOptions: Ref = ref({})
+  // 初始化全局参数
+  _layoutMode = layoutMode
+  _routeInstance = routeInst
+  _allRoutes  = routes
+  _asyncRoutes = asyncRoutes
+  _asyncSideRoutes = asyncSideRoutes
+  _defaultTopActive = defaultActive
+
   const hanleMap = {
     'top': handleTopOrSideMenuConfig,
     'aside': handleTopOrSideMenuConfig,
     'topAside': handleAsideTopMenuConfig
   }
-  const handler =  hanleMap[layoutMode as string]
+
+  const handler =  hanleMap[_layoutMode as string]
   if(handler) {
     handler({
-      type,
-      routeInst,
-      routes,
-      asyncRoutes,
-      asyncSideRoutes,
-      layoutMode,
-      defaultActive,
-      topMenuOptions,
-      sideMenuOptions
+      type
     })
   }
   return {
@@ -105,25 +111,20 @@ const useMenu = ({
 /**
  * 设置顶部或侧边菜单栏配置
  */
-function handleTopOrSideMenuConfig({
-  routeInst,
-  routes,
-  layoutMode,
-  defaultActive,
-  topMenuOptions,
-  sideMenuOptions
-}:useSideMenuType){
+function handleTopOrSideMenuConfig(){
   const options = deepClone(menuConfig)
   const hanleMap = {
     'top': handleTopMenu,
     'aside': handleAsideMenu,
   }
-  const handler =  hanleMap[layoutMode as string]
-  options['menu'] = (handler && handler(routes,options)) || []
+  const handler =  hanleMap[_layoutMode as string]
+  options['menu'] = (handler && handler(_allRoutes,options)) || []
   options.event['select'] =  (name: string) => {
-    routeInst.push({name})
+    _routeInstance.push({name})
   }
-  setDefaultActive(routeInst,defaultActive as string,options)
+
+  setdefaultTopActive(_defaultTopActive as string,options)
+
   topMenuOptions.value = options
   sideMenuOptions.value = options
   return options
@@ -132,13 +133,12 @@ function handleTopOrSideMenuConfig({
 
 /**
  * 设置默认激活菜单栏
- * @param routeInst 
- * @param route 
+ * @param routeName 
  */
-function setDefaultActive(routeInst: any,route: string, options: object){
+function setdefaultTopActive(routeName: string, options: object){
   /* eslint-disable no-unused-vars */  
-  options.attr["default-active"] = route
-  routeInst.push({name:route})
+  options.attr["default-active"] = routeName
+  _routeInstance.push({name:routeName})
 }
 
 /**
@@ -177,33 +177,14 @@ function handleTopMenu(routes: Array<any>, options: object){
  * 设置顶部和侧边菜单栏配置
  */
 function handleAsideTopMenuConfig({
-  type,
-  routeInst,
-  routes,
-  layoutMode,
-  defaultActive,
-  topMenuOptions,
-  sideMenuOptions
+  type
 }:useSideMenuType) {
   if(type === 'top') {
-    generateTopMenuConfig({
-      routeInst,
-      routes,
-      layoutMode,
-      defaultActive,
-      topMenuOptions,
-      sideMenuOptions
-    })
+    generateTopMenuConfig()
   }
   if(type === 'side') {
     generateAsideMenuConfig({
-      type,
-      routeInst,
-      routes,
-      layoutMode,
-      defaultActive,
-      topMenuOptions,
-      sideMenuOptions
+      defaultActive: _defaultTopActive
     })
   }
 }
@@ -213,23 +194,16 @@ function handleAsideTopMenuConfig({
  * @param param0 
  * @returns 
  */
-function generateTopMenuConfig({
-  routeInst,
-  routes,
-  defaultActive,
-  topMenuOptions,
-  sideMenuOptions
-}:useSideMenuType){
-  const topMenus = routeStore.getTopRouters()
+function generateTopMenuConfig(){
+  const topMenus = menuStore.getTopRouters()
   if(!isEmpty(topMenus)){
     console.log("🚀 生成顶部栏函数，顶部菜单栏不是空，直接返回:")
     topMenuOptions.value  = topMenus
     return 
   }
   const options = deepClone(menuConfig)
-  console.log("🚀 生成顶部栏函数 routes==:",routes)
     // 过滤获取展示路由
-  const showMenus = routes.filter(route => !route.hidden ).sort((route1,route2)=> route1.order - route2.order)
+  const showMenus = _allRoutes.filter(route => !route.hidden ).sort((route1,route2)=> route1.order - route2.order)
   options['menu'] = showMenus.map(route => {
     return {
       attr: {
@@ -246,16 +220,12 @@ function generateTopMenuConfig({
   delete options.collapse 
   options.event['select'] =  (name: string) => {
     generateAsideMenuConfig({
-      routeInst,
-      routes,
-      defaultActive,
-      topMenuOptions,
-      sideMenuOptions
+      defaultActive: name
     })
   }
-  setDefaultActive(routeInst,defaultActive as string,options)
+  setdefaultTopActive(_defaultTopActive as string,options)
   topMenuOptions.value = options
-  routeStore.SetTopRouters(topMenuOptions.value)
+  menuStore.SetTopRouters(topMenuOptions.value)
   console.log("🚀 ~ 生成顶部菜单配置====",JSON.parse(JSON.stringify(topMenuOptions.value)))
 }
 
@@ -265,44 +235,32 @@ function generateTopMenuConfig({
  * @returns 
  */
 function generateAsideMenuConfig({
-  routeInst,
-  routes,
-  topMenuOptions,
-  sideMenuOptions,
-  layoutMode,
-  defaultActive,
+  defaultActive
 }:useSideMenuType){
-  const topMenus = routeStore.getTopRouters()
-  if(isEmpty(topMenus)){
+  const topMenus = menuStore.getTopRouters()
+  if(_layoutMode === 'topAside' && isEmpty(topMenus)){
     console.log("🚀 生成侧边栏函数，顶部菜单栏为空，生成顶部菜单:")
 
-    generateTopMenuConfig({
-      routeInst,
-      routes,
-      layoutMode,
-      defaultActive,
-      topMenuOptions,
-      sideMenuOptions
-    })
+    generateTopMenuConfig()
   }
   const options = deepClone(menuConfig)
 
   if(!defaultActive) {
-    console.log('===生成侧边栏菜单 defaultActive 为空====',  defaultActive)
+    console.log('===生成侧边栏菜单 _defaultTopActive 为空====',  defaultActive)
     sideMenuOptions.value = options
     return 
   }
     // 过滤获取展示路由
-  const showMenus = routes.filter(route => !route.hidden && route.name === defaultActive)
+  const showMenus = _allRoutes.filter(route => !route.hidden && route.name === defaultActive)
   console.log('===生成侧边栏菜单 showMenus ====',showMenus)
   if(!showMenus || !showMenus[0]) return false
   const asideMenus = handleAsideMenu(showMenus[0].children,options)
   options['menu'] = asideMenus
   options.event['select'] =  (name: string) => {
-    routeInst.push({name})
+    _routeInstance.push({name})
   }
   sideMenuOptions.value = deepClone(options)
-  routeStore.SetSideRouters(sideMenuOptions.value)
+  menuStore.SetSideRouters(sideMenuOptions.value)
   console.log("🚀 ~ 生成侧边菜单配置====", JSON.parse(JSON.stringify(sideMenuOptions.value)))
 }
 

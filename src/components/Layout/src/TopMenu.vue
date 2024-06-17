@@ -12,7 +12,6 @@ import { XMenu } from "xw-ui/element-plus";
 import { useMenu } from "../hooks/useMenu.ts";
 import { routesStoreWithOut } from "@/stores/modules/common/routes";
 import { useRouter } from "vue-router";
-import { ref,reactive, watch, type Ref } from 'vue'
 const router = useRouter()
 const props = defineProps({
   layoutMode: String,

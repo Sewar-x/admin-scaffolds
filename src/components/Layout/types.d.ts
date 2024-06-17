@@ -5,12 +5,10 @@ export interface LayoutType {
 
 export interface useSideMenuType {
     type?: 'side' | 'top',
-    routeInst: any,
+    routeInst?: any,
     routes?: Array<any>,
     asyncRoutes?: Array<any>,
     asyncSideRoutes?: Array<any>,
     layoutMode?: String,
-    defaultActive?: String,
-    topMenuOptions?:Ref, 
-    sideMenuOptions?: Ref
+    defaultActive?: String
   }
