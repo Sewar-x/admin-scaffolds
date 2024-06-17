@@ -1,3 +1,7 @@
+import {
+  Document,
+  Setting,
+} from "@element-plus/icons-vue";
 export default {
     path: "/async-menus",
     name: 'asyncMenus',
@@ -8,7 +12,7 @@ export default {
     meta: {
         title: '异步菜单',
         hideBreadcrumb: false,
-
+        icon: Document
     },
     children: [
         {
@@ -18,6 +22,7 @@ export default {
           hidden: false,
           meta: {
             title: '异步菜单1',
+            icon: Setting
           }
         },
         {
@@ -27,6 +32,7 @@ export default {
           hidden: false,
           meta: {
             title: '异步菜单2',
+            icon: Setting
           }
         },
         {
@@ -36,6 +42,7 @@ export default {
           hidden: false,
           meta: {
             title: '异步菜单3',
+            icon: Setting
           }
         }
     ]

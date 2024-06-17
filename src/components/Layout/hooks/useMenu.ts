@@ -4,7 +4,6 @@ import type { RouteItem } from 'vue-router';
 import { deepClone } from "@/utils/index"
 import { isEmpty } from "@/utils/is"
 import {
-    Document,
     Expand,
     Fold,
   } from "@element-plus/icons-vue";
@@ -153,7 +152,7 @@ function handleAsideMenu(routes: Array<any>, options: object){
         index: route.name,
       }, // el-menu-item的属性对象
       icon: {
-        name: Document, // 图标名
+        name: route?.meta?.icon || '', // 图标名
       },
       title: route.meta.title, // 菜单项文本内容
       subMenu: route.children? handleAsideMenu(route.children,options): []
@@ -237,9 +236,9 @@ function generateTopMenuConfig({
         index: route.name,
       }, // el-menu-item的属性对象
       icon: {
-        name: Document, // 图标名
+        name: route?.meta?.icon || '', // 图标名
       },
-      title: route.meta.title, // 菜单项文本内容
+      title: route?.meta?.title || '', // 菜单项文本内容
     }
   })
   options.attr['mode'] = 'horizontal'

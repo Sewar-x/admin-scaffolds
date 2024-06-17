@@ -1,3 +1,7 @@
+import {
+  Document,
+  Location,
+} from "@element-plus/icons-vue";
 export default {
     path: "/auth-menus",
     name: 'authMenus',
@@ -8,7 +12,7 @@ export default {
     meta: {
         title: '权限菜单',
         hideBreadcrumb: false,
-
+        icon: Document
     },
     children: [
         {
@@ -18,6 +22,7 @@ export default {
           hidden: false,
           meta: {
             title: '权限菜单1',
+            icon: Location
           }
         },
         {
@@ -27,6 +32,7 @@ export default {
           hidden: false,
           meta: {
             title: '权限菜单2',
+            icon: Location
           }
         }
     ]
