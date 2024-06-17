@@ -1,6 +1,7 @@
-import { ref, watch } from 'vue'
+import { ref, type Ref} from 'vue'
 import type { useSideMenuType } from '../types.d.ts'
 import { deepClone } from "@/utils/index"
+import { isEmpty } from "@/utils/is"
 import { routesStoreWithOut } from "@/stores/modules/common/routes";
 const routeStore = routesStoreWithOut()
 import {
@@ -30,16 +31,19 @@ const menuConfig = {
   };
 
 
+
 const useMenu = ({
+  type,
   routeInst,
   routes,
   asyncRoutes,
   asyncSideRoutes,
   layoutMode,
   defaultActive,
-  topMenuOptions,
-  sideMenuOptions
+ 
 }:useSideMenuType) => {
+  let topMenuOptions: Ref = ref({})
+  let sideMenuOptions: Ref = ref({})
   const hanleMap = {
     'top': handleTopOrSideMenuConfig,
     'aside': handleTopOrSideMenuConfig,
@@ -48,6 +52,7 @@ const useMenu = ({
   const handler =  hanleMap[layoutMode as string]
   if(handler) {
     handler({
+      type,
       routeInst,
       routes,
       asyncRoutes,
@@ -139,6 +144,7 @@ function handleTopMenu(routes: Array<any>, options: object){
  * 设置顶部和侧边菜单栏配置
  */
 function handleAsideTopMenuConfig({
+  type,
   routeInst,
   routes,
   layoutMode,
@@ -146,15 +152,27 @@ function handleAsideTopMenuConfig({
   topMenuOptions,
   sideMenuOptions
 }:useSideMenuType) {
- generateTopMenuConfig({
-    routeInst,
-    routes,
-    layoutMode,
-    defaultActive,
-    topMenuOptions,
-    sideMenuOptions
-  })
-
+  if(type === 'top') {
+    generateTopMenuConfig({
+      routeInst,
+      routes,
+      layoutMode,
+      defaultActive,
+      topMenuOptions,
+      sideMenuOptions
+    })
+  }
+  if(type === 'side') {
+    generateAsideMenuConfig({
+      type,
+      routeInst,
+      routes,
+      layoutMode,
+      defaultActive,
+      topMenuOptions,
+      sideMenuOptions
+    })
+  }
 }
 
 /**
@@ -169,7 +187,14 @@ function generateTopMenuConfig({
   topMenuOptions,
   sideMenuOptions
 }:useSideMenuType){
+  const topMenus = routeStore.getTopRouters
+  if(!isEmpty(topMenus)){
+    console.log("🚀 生成顶部栏函数，顶部菜单栏不是空，直接返回:")
+    topMenuOptions.value  = topMenus
+    return 
+  }
   const options = deepClone(menuConfig)
+  console.log("🚀 生成顶部栏函数 routes==:",routes)
     // 过滤获取展示路由
   const showMenus = routes.filter(route => !route.hidden ).sort((route1,route2)=> route1.order - route2.order)
   options['menu'] = showMenus.map(route => {
@@ -190,7 +215,7 @@ function generateTopMenuConfig({
     generateAsideMenuConfig({
       routeInst,
       routes,
-      activeMenu: name,
+      defaultActive,
       topMenuOptions,
       sideMenuOptions
     })
@@ -198,7 +223,7 @@ function generateTopMenuConfig({
   setDefaultActive(routeInst,defaultActive as string,options)
   topMenuOptions.value = options
   routeStore.SetTopRouters(topMenuOptions.value)
-  console.log("🚀 ~ 生成顶部菜单配置====", topMenuOptions.value)
+  console.log("🚀 ~ 生成顶部菜单配置====",JSON.parse(JSON.stringify(topMenuOptions.value)))
 }
 
 /**
@@ -209,19 +234,35 @@ function generateTopMenuConfig({
 function generateAsideMenuConfig({
   routeInst,
   routes,
-  activeMenu,
   topMenuOptions,
-  sideMenuOptions
+  sideMenuOptions,
+  layoutMode,
+  defaultActive,
 }:useSideMenuType){
+  const topMenus = routeStore.getTopRouters
+  if(isEmpty(topMenus)){
+    console.log("🚀 生成侧边栏函数，顶部菜单栏为空，生成顶部菜单:")
+
+    generateTopMenuConfig({
+      routeInst,
+      routes,
+      layoutMode,
+      defaultActive,
+      topMenuOptions,
+      sideMenuOptions
+    })
+  }
   const options = deepClone(menuConfig)
-  console.log('===activeMenu====',activeMenu)
-  if(!activeMenu) {
+
+  if(!defaultActive) {
+    console.log('===生成侧边栏菜单 defaultActive 为空====',  defaultActive)
     sideMenuOptions.value = options
     return 
   }
-
     // 过滤获取展示路由
-  const showMenus = routes.filter(route => !route.hidden && route.name === activeMenu)
+  const showMenus = routes.filter(route => !route.hidden && route.name === defaultActive)
+  console.log('===生成侧边栏菜单 showMenus ====',showMenus)
+  if(!showMenus || !showMenus[0]) return false
   const asideMenus = handleAsideMenu(showMenus[0].children,options)
   options['menu'] = asideMenus
   options.event['select'] =  (name: string) => {
@@ -229,7 +270,7 @@ function generateAsideMenuConfig({
   }
   sideMenuOptions.value = deepClone(options)
   routeStore.SetSideRouters(sideMenuOptions.value)
-  console.log("🚀 ~ 生成侧边菜单配置====", sideMenuOptions.value)
+  console.log("🚀 ~ 生成侧边菜单配置====", JSON.parse(JSON.stringify(sideMenuOptions.value)))
 }
 
 

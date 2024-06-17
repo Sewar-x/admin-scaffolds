@@ -10,7 +10,7 @@ const setting: ProjectConfig = {
   // element ui size
   elementSize: "mini",
   layoutMode: "topAside", //'top' | 'aside' | 'topAside' | 'none'
-  defaultActive: 'authMenu1' // 默认首页路由名称
+  defaultActive: 'authMenus' // 默认首页路由名称
 };
 
 export default setting;

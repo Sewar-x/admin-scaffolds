@@ -1,5 +1,5 @@
 <template>
-  <XMenu :options="topMenuOptions">
+  <XMenu key="topMenu" :options="topMenuOptions">
     <template #header>
       <img class="logo" :src="Logo" />
     </template>
@@ -20,20 +20,16 @@ const props = defineProps({
 });
 
 const userStore = routesStoreWithOut();
-let topMenuOptions: Ref = ref({})
-let sideMenuOptions: Object = reactive({})
-useMenu({
+const { topMenuOptions } = useMenu({
+  type: 'top',
   routeInst: router,
   layoutMode: props.layoutMode,
   routes: userStore.getRoutes,
   asyncRoutes: userStore.getAddRoutes,
   asyncSideRoutes: userStore.getAdminRoutes,
   defaultActive: props.defaultActive,
-  topMenuOptions,
-  sideMenuOptions
 });
  console.log('===顶部菜单变化====',topMenuOptions)
-
 </script>
 
 <style scoped lang="less">
