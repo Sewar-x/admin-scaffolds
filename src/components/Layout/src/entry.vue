@@ -7,12 +7,11 @@
     <SideMenu
       class="layout-side-menu"
       v-if="layoutMode === 'aside' || layoutMode === 'topAside'"
-      :layoutMode="layoutMode"
-      :default-active="ProjectConfig.defaultActive"
+      :options="options"
     />
     <div class="layout-content-container">
       <el-header class="header" v-if="layoutMode === 'top' || layoutMode === 'topAside'">
-        <TopMenu :layoutMode="layoutMode" class="layout-top-menu" />
+        <TopMenu :options="options" class="layout-top-menu" />
       </el-header>
       <el-main class="layout-content-main">
         <router-view />
@@ -33,7 +32,21 @@
 import TopMenu from "./TopMenu.vue";
 import SideMenu from "./SideMenu.vue";
 import ProjectConfig from "@/settings/projectSetting";
-const layoutMode = ProjectConfig.layoutMode;
+import { routesStoreWithOut } from "@/stores/modules/common/routes";
+import { useRouter } from "vue-router";
+const routeStore = routesStoreWithOut()
+const router = useRouter();
+const options = {
+  routeInst: router,
+  layoutMode: ProjectConfig.layoutMode,
+  routes: routeStore.getRoutes,
+  asyncRoutes: routeStore.getAddRoutes,
+  asyncSideRoutes: routeStore.getAdminRoutes,
+  defaultActive: ProjectConfig.defaultActive,
+}
+
+const layoutMode = ProjectConfig.layoutMode
+
 </script>
 
 <style scoped lang="less">

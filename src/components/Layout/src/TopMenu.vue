@@ -1,5 +1,5 @@
 <template>
-  <XMenu key="topMenu" :options="topMenuOptions">
+  <XMenu key="topMenu" :options="config">
     <template #header>
       <img class="logo" :src="Logo" />
     </template>
@@ -10,25 +10,24 @@
 import Logo from "/logo.svg";
 import { XMenu } from "xw-ui/element-plus";
 import { useMenu } from "../hooks/useMenu.ts";
-import { routesStoreWithOut } from "@/stores/modules/common/routes";
-import { useRouter } from "vue-router";
-const router = useRouter()
-const props = defineProps({
-  layoutMode: String,
-  defaultActive: String,
+import { computed } from "vue";
+import type { SideMenuType } from "../types.d";
+
+const props = defineProps<{
+  options: SideMenuType
+}>()
+
+const { topMenuOptions } = useMenu({
+  type: "top",
+  routeInst: props.options.routeInst,
+  layoutMode: props.options.layoutMode,
+  routes: props.options.routes,
+  asyncRoutes: props.options.asyncRoutes,
+  asyncSideRoutes: props.options.asyncSideRoutes,
+  defaultActive: props.options.defaultActive,
 });
 
-const userStore = routesStoreWithOut();
-const { topMenuOptions } = useMenu({
-  type: 'top',
-  routeInst: router,
-  layoutMode: props.layoutMode,
-  routes: userStore.getRoutes,
-  asyncRoutes: userStore.getAddRoutes,
-  asyncSideRoutes: userStore.getAdminRoutes,
-  defaultActive: props.defaultActive,
-});
- console.log('===顶部菜单变化====',topMenuOptions)
+const config = computed(() => topMenuOptions.value);
 </script>
 
 <style scoped lang="less">

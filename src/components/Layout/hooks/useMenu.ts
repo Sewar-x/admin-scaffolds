@@ -1,5 +1,5 @@
 import { ref, type Ref} from 'vue'
-import type { useSideMenuType,LayoutType } from '../types.d.ts'
+import type { SideMenuType,LayoutType } from '../types.d.ts'
 import type { RouteItem } from 'vue-router';
 import { deepClone } from "@/utils/index"
 import { isEmpty } from "@/utils/is"
@@ -81,7 +81,7 @@ const useMenu = ({
   asyncSideRoutes= [],
   layoutMode = 'aside',
   defaultActive = '',
-}:useSideMenuType) => {
+}:SideMenuType) => {
   // 初始化全局参数
   _layoutMode = layoutMode
   _routeInstance = routeInst
@@ -178,7 +178,7 @@ function handleTopMenu(routes: Array<any>, options: object){
  */
 function handleAsideTopMenuConfig({
   type
-}:useSideMenuType) {
+}:SideMenuType) {
   if(type === 'top') {
     generateTopMenuConfig()
   }
@@ -236,7 +236,7 @@ function generateTopMenuConfig(){
  */
 function generateAsideMenuConfig({
   defaultActive
-}:useSideMenuType){
+}:SideMenuType){
   const topMenus = menuStore.getTopRouters()
   if(_layoutMode === 'topAside' && isEmpty(topMenus)){
     console.log("🚀 生成侧边栏函数，顶部菜单栏为空，生成顶部菜单:")

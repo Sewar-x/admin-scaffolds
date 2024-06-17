@@ -3,12 +3,12 @@ export interface LayoutType {
     layoutMode: 'top' | 'aside' | 'topAside' | 'none'
 }
 
-export interface useSideMenuType {
+export interface SideMenuType {
     type?: 'side' | 'top',
     routeInst?: any,
     routes?: Array<any>,
     asyncRoutes?: Array<any>,
     asyncSideRoutes?: Array<any>,
-    layoutMode?: String,
-    defaultActive?: String
+    layoutMode?: string,
+    defaultActive?: string
   }
