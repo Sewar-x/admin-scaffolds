@@ -1,3 +1,4 @@
+import { Layout } from '@/router/layout'
 import {
   Document,
   Setting,
@@ -5,7 +6,7 @@ import {
 export default {
     path: "/async-menus",
     name: 'asyncMenus',
-    component: () => import("@/components/Layout/src/entry.vue"),
+    component: Layout,
     order: 2,
     hidden: false,
     redirect: "/async-menus/asyncMenu1",

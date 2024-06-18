@@ -1,3 +1,4 @@
+import { Layout } from '@/router/layout'
 import {
   Document,
   Location,
@@ -5,7 +6,7 @@ import {
 export default {
     path: "/auth-menus",
     name: 'authMenus',
-    component: () => import("@/components/Layout/src/entry.vue"),
+    component: Layout,
     order: 1,
     hidden: false,
     redirect: "/auth-menus/authMenu1",
