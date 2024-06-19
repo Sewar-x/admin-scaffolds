@@ -1,14 +1,14 @@
 <template>
-  <div class="login-container">
-    <el-card class="login-panel">
+  <div :class="[`${prefixCls}-container`]">
+    <el-card :class="[`${prefixCls}-panel`]">
       <template #header>
-        <div class="card-header">
+        <div :class="[`${prefixCls}-header`]">
           <span>登录</span>
         </div>
       </template>
       <XForm :options="options"></XForm>
       <template #footer>
-        <div class="footer">
+        <div :class="[`${prefixCls}-footer`]">
           <el-button type="plain" link disabled> 其他登录方式 </el-button>
           <el-button type="danger" link disabled> 忘记密码 </el-button>
         </div>
@@ -25,6 +25,9 @@ import { cookieUtils } from "@/plugins/storage";
 import { login } from "@/api/login";
 import requestSetting from "@/settings/requestSetting";
 import { useRouter } from "vue-router";
+import { useDesign } from "@/hooks/web/useDesign";
+const { getPrefixCls } = useDesign();
+const prefixCls = getPrefixCls("login");
 const router = useRouter();
 interface RuleForm {
   username: string;
@@ -121,13 +124,15 @@ const submit = async (params: any) => {
 </script>
 
 <style scoped lang="less">
-.login-container {
+@prefix-cls: ~"@{adminNamespace}-login";
+
+.@{prefix-cls}-container {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  .login-panel {
+  .@{prefix-cls}-panel {
     width: 500px;
     height: 300px;
     :deep(.el-form-item__label) {
@@ -137,7 +142,7 @@ const submit = async (params: any) => {
     :deep(.login-button) {
       width: 100%;
     }
-    .footer {
+    .@{prefix-cls}-footer {
       display: flex;
       justify-content: space-between;
     }
