@@ -25,7 +25,6 @@ export async function setupXWPermission(app: App, router: any) {
     }
     await initPermission(app, options, (params: any) => {
         if (!params) return null
-        console.log("🚀 ~permission params:",params)
         const routeStore = routesStoreWithOut()
         routeStore.initPermissionInst(params)
     })

@@ -1,37 +1,27 @@
-import { resolve } from 'path'
 import { fileURLToPath, URL } from 'node:url'
 import type { UserConfig, ConfigEnv } from 'vite'
 import { loadEnv } from 'vite'
 import { wrapperEnv, buildAssetsFile, buildChunkFile } from "./build/utils";
 import { createProxy } from "./build/vite/proxy";
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import progress from 'vite-plugin-progress' // vite 打包进度插件
-import { createStyleImportPlugin, ElementPlusResolve } from 'vite-plugin-style-import' // element plus 按需引入
-import { viteMockServe } from 'vite-plugin-mock' // mock 服务
-import UnoCSS from 'unocss/vite'
 import { visualizer } from 'rollup-plugin-visualizer' // vite打包视图分析
-import { ViteEjsPlugin } from 'vite-plugin-ejs'
+import { createVitePlugin } from "./build/vite/plugin";
 
 // https://vitejs.dev/config/
 const url = import.meta.url;
 // process.cwd()方法返回Node.js进程的当前工作目录。
 const root = process.cwd()
 
-
-// https://vitejs.dev/config/
 export default ({ command, mode }: ConfigEnv): UserConfig => {
 
   // 加载 root 中的 .env 文件。根据执行命令的环境类型获取变量
   const env = loadEnv(mode, root);
   // loadEnv读取的布尔类型是一个字符串。这个函数可以转换为布尔类型
   const viteEnv = wrapperEnv(env);
+  const isBuild = command === "build";
   const {
     VITE_BASE_PATH,
-    VITE_USE_ALL_ELEMENT_PLUS_STYLE,
     VITE_PROXY,
     VITE_DROP_CONSOLE,
-    VITE_USE_MOCK,
     VITE_DROP_DEBUGGER,
     VITE_OUT_DIR,
     VITE_ASSETS_DIR,
@@ -39,57 +29,10 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     VITE_USE_BUNDLE_ANALYZER,
     VITE_USE_CSS_SPLIT,
     VITE_DEV_PORT,
-    VITE_USE_MICRO_APP
   } = viteEnv;
   return {
     base: VITE_BASE_PATH,
-    plugins: [
-      vue({
-        script: {
-          // 开启defineModel
-          defineModel: true
-        },
-        template: {
-          compilerOptions: VITE_USE_MICRO_APP ? {
-            isCustomElement: tag => /^micro-app/.test(tag)
-          } : {}
-        }
-      }),
-      vueJsx(),
-      progress(),
-      // 是否全量引入 element plus
-      VITE_USE_ALL_ELEMENT_PLUS_STYLE === false
-        ? createStyleImportPlugin({
-          resolves: [ElementPlusResolve()],
-          libs: [
-            {
-              libraryName: 'element-plus',
-              esModule: true,
-              resolveStyle: (name) => {
-                if (name === 'click-outside') {
-                  return ''
-                }
-                return `element-plus/es/components/${name.replace(/^el-/, '')}/style/css`
-              }
-            }
-          ]
-        })
-        : undefined,
-    
-      // 是否开启 Mock 服务
-      VITE_USE_MOCK
-        ? viteMockServe({
-          ignore: /^\_/,
-          mockPath: 'mock',
-          supportTs: true, // 默认为 false，如果你的 mock 文件是 .ts 后缀，需要改为 true  
-
-        })
-        : undefined,
-      ViteEjsPlugin({
-        title: env.VITE_APP_TITLE
-      }),
-      UnoCSS()
-    ],
+    plugins: createVitePlugin(viteEnv, isBuild),
     // css 配置
     css: {
       preprocessorOptions: {

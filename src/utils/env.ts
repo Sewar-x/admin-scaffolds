@@ -1,4 +1,3 @@
-import type { ImportMetaEnv } from "#/env";
 
 import { getConfigFileName } from "../../build/utils";
 
@@ -12,46 +11,7 @@ export function getAppEnvConfig() {
 
   const ENV = (import.meta.env.DEV
     ? // Get the global configuration (the configuration will be extracted independently when packaging)
-    (import.meta.env as unknown as ImportMetaEnv)
-    : window[ENV_NAME as any]) as unknown as ImportMetaEnv;
-
-  const {
-    VITE_APP_TITLE,
-    VITE_BASE_PATH,
-    VITE_USE_ALL_ELEMENT_PLUS_STYLE,
-    VITE_PROXY,
-    VITE_DROP_CONSOLE,
-    VITE_USE_MOCK,
-    VITE_DROP_DEBUGGER,
-    VITE_OUT_DIR,
-    VITE_ASSETS_DIR,
-    VITE_SOURCEMAP,
-    VITE_USE_BUNDLE_ANALYZER,
-    VITE_USE_CSS_SPLIT,
-    VITE_DEV_PORT,
-    VITE_USE_MICRO_APP,
-    VITE_MULTIPLE_LANGUAGES,
-    VITE_USE_XW_UI_ELEMENT_PLUS,
-    VITE_USE_XW_UI_PERMISSION
-  } = ENV;
-
-  return {
-    VITE_APP_TITLE,
-    VITE_BASE_PATH,
-    VITE_USE_ALL_ELEMENT_PLUS_STYLE,
-    VITE_PROXY,
-    VITE_DROP_CONSOLE,
-    VITE_USE_MOCK,
-    VITE_DROP_DEBUGGER,
-    VITE_OUT_DIR,
-    VITE_ASSETS_DIR,
-    VITE_SOURCEMAP,
-    VITE_USE_BUNDLE_ANALYZER,
-    VITE_USE_CSS_SPLIT,
-    VITE_DEV_PORT,
-    VITE_USE_MICRO_APP,
-    VITE_MULTIPLE_LANGUAGES,
-    VITE_USE_XW_UI_ELEMENT_PLUS,
-    VITE_USE_XW_UI_PERMISSION
-  };
+    (import.meta.env as unknown as ViteEnv)
+    : window[ENV_NAME as any]) as unknown as ViteEnv;
+  return ENV;
 }
