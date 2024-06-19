@@ -14,4 +14,5 @@ export const localeSetting: LocaleSetting = {
   fallback: LOCALE.ZH_CN[0],
   // available Locales
   availableLocales: [LOCALE.ZH_CN[0], LOCALE.EN_US[0]],
+  localeKey:  "_Locale"
 };

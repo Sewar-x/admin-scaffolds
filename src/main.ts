@@ -30,10 +30,7 @@ async function bootstrap() {
     await initElementPlus(app);
 
     store = await initStore(app);
-    // 使用国际化 i18n
-    if (VITE_MULTIPLE_LANGUAGES === 'true') {
-        await initI18n(app);
-    }
+
     route = await initRoute(app);
     // 使用 路由权限控制
     if (VITE_USE_XW_UI_PERMISSION === 'true') {
@@ -51,7 +48,10 @@ async function bootstrap() {
     if (VITE_USE_XW_UI_ELEMENT_PLUS === 'true') {
         await initXWElementPlus(app);
     }
-
+    // 使用国际化 i18n
+    if (VITE_MULTIPLE_LANGUAGES === 'true') {
+        await initI18n(app);
+    }
 
 
     app.mount("#app");

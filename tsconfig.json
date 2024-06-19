@@ -50,9 +50,9 @@
       "#/*": [
         "./types/*"
       ],
-      // "$locale": [
-      //   "./src/locales/setupLocale.ts"
-      // ],
+      "$locale": [
+        "./src/locales/setupLocale.ts"
+      ],
       "$store/*": [
         "./src/stores/modules/*"
       ],
@@ -64,7 +64,6 @@
     "types": [
       "node",
       "vite/client",
-      "@intlify/unplugin-vue-i18n/types",
       "vite/client",
       "element-plus/global",
       "vite-plugin-svg-icons/client"

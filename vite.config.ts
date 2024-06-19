@@ -8,7 +8,6 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import progress from 'vite-plugin-progress' // vite 打包进度插件
 import { createStyleImportPlugin, ElementPlusResolve } from 'vite-plugin-style-import' // element plus 按需引入
-import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite' // i18n 预编译
 import { viteMockServe } from 'vite-plugin-mock' // mock 服务
 import UnoCSS from 'unocss/vite'
 import { visualizer } from 'rollup-plugin-visualizer' // vite打包视图分析
@@ -77,13 +76,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         })
         : undefined,
     
-
-      // i18n 预编译
-      VueI18nPlugin({
-        runtimeOnly: true,
-        compositionOnly: true,
-        include: [resolve(__dirname, 'src/locales/**')]
-      }),
       // 是否开启 Mock 服务
       VITE_USE_MOCK
         ? viteMockServe({

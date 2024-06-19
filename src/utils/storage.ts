@@ -68,7 +68,11 @@ export default class Storage {
  */
   static setLocalStorage<T>(k: string, v: T) {
     try {
-      window.localStorage.setItem(k, JSON.stringify(v))
+      if(typeof v !=='string') {
+        window.localStorage.setItem(k, JSON.stringify(v))
+      }else {
+        window.localStorage.setItem(k, v)
+      }
     } catch (error) {
       return false
     }

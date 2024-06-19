@@ -10,8 +10,9 @@ export interface ProjectConfig {
   elementSize: string;
     // 布局模式
   layoutMode: 'top' | 'aside' | 'topAside' | 'none';
-  defaultActive: string// 默认首页路由名称
-}
+  defaultActive: string;// 默认首页路由名称
+  homePageName: string; // 首页路由名称
+ }
 
 export interface LocaleSetting {
   showPicker: boolean;
@@ -21,6 +22,6 @@ export interface LocaleSetting {
   fallback: LocaleType;
   // available Locales
   availableLocales: LocaleType[];
-
+  localeKey: string
 }
 

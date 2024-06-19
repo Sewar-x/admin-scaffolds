@@ -20,65 +20,37 @@
 | 构建     | 自定义构建                                            |
 | 部署     | GitLab 流水线、自定义脚本                             |
 
-## 页面
-
-该模板包含基础页面：
-
-* 登录
-* 菜单和内容容器
-* 404
-
-### 登录
-
-登录相关功能：
-
-* 登录
-* 单点登录
-* token 校验
-* token 刷新
-
-### 菜单和容器
-
-菜单与权限相关联，通过权限配置 map 动态生成菜单栏；
-
-菜单栏分为左侧菜单栏和顶部菜单栏，通过配置菜单栏可以显示三种类型
-
-* 仅左侧菜单栏
-* 仅顶部菜单栏
-* 顶部菜单和左侧菜单
-  * 当同同时存在顶部菜单栏和左侧菜单时，将顶部菜单设置为一级菜单，左侧菜单设置为二级菜单
-
 
 
 
 
 ## 技术栈
 
-| 功能     | 描述                       | 技术                                     |
-| -------- | -------------------------- | ---------------------------------------- |
-| 项目规范 | JS规范                     | Eslint                                   |
-|          | Git 提交规范               | commitlint                               |
-|          | 样式规范                   | stylelint                                |
-|          | 代码格式                   | prettier                                 |
-|          | Git检查                    | husky                                    |
-| 环境     | 开发、测试、正式           |                                          |
-|          | mock                       | vite-plugin-mock                         |
-| 样式管理 | 全局样式                   | less、postcss                            |
-|          | 原子化 CSS                 | unocss                                   |
-|          | 样式隔离                   | BEM                                      |
-| 路由管理 | 顶部菜单栏、侧边栏         | Vue-Router                               |
-| 权限管理 | 菜单权限、按钮/组件权限    |                                          |
-| 组件库   | JSON Scheme 公共组件库     | [xw-ui](https://sewar-x.github.io/X-UI/) |
-|          | 组件库                     | element-plus                             |
-| 插件管理 | 按需引入、自定义插件       |                                          |
-| 国际化   | 本地语言数据、远程语言数据 | vue-i18n                                 |
-| 主题管理 |                            |                                          |
-| http     | xw-ui/xhttp                |                                          |
-| 开发     | mock数据                   |                                          |
-|          | 页面模板生成               | plop                                     |
-| 测试     |                            |                                          |
-| 构建     | 自定义构建                 | Vite                                     |
-| 部署     | GitLab 流水线、自定义脚本  |                                          |
+| 功能     | 描述                                  | 技术                                                         |
+| -------- | ------------------------------------- | ------------------------------------------------------------ |
+| 项目规范 | JS规范                                | Eslint                                                       |
+|          | Git 提交规范                          | commitlint                                                   |
+|          | 样式规范                              | stylelint                                                    |
+|          | 代码格式                              | prettier                                                     |
+|          | Git检查                               | husky                                                        |
+| 环境     | 开发、测试、正式                      |                                                              |
+|          | mock                                  | vite-plugin-mock                                             |
+| 样式管理 | 全局样式                              | less、postcss                                                |
+|          | 原子化 CSS                            | unocss                                                       |
+|          | 样式隔离                              | 公共样式前缀                                                 |
+| 路由管理 | 顶部菜单栏、侧边栏                    | Vue-Router                                                   |
+| 权限管理 | 菜单权限、按钮/组件权限               |                                                              |
+| 组件库   | JSON Scheme 公共组件库                | [xw-ui](https://sewar-x.github.io/X-UI/)                     |
+|          | 组件库                                | element-plus                                                 |
+| 插件管理 | 按需引入、自定义插件                  |                                                              |
+| 国际化   | 本地语言数据、远程语言数据            | vue-i18n                                                     |
+| 主题管理 |                                       |                                                              |
+| http     | 集成全局 Token、Token刷新、校验、清除 | [xw-ui/xhttp](https://sewar-x.github.io/X-UI/zh-CN/components/library/xhttp/%E4%BD%BF%E7%94%A8.html#%E5%8A%9F%E8%83%BD) |
+| 开发     | mock数据                              |                                                              |
+|          | 页面模板生成                          | plop                                                         |
+| 测试     |                                       |                                                              |
+| 构建     | 自定义构建                            | Vite                                                         |
+| 部署     | GitLab 流水线、自定义脚本             |                                                              |
 
 ## 项目配置
 
@@ -212,7 +184,75 @@ VITE_USE_XW_UI_PERMISSION=true
 
 ## mock 联调
 
-## 路由
+## 页面
+
+该模板包含基础页面：
+
+* 登录
+* 菜单和内容容器
+* 404
+
+### 登录
+
+登录相关功能：
+
+* 登录
+* 单点登录
+* token 校验
+* token 刷新
+
+### 菜单和容器
+
+菜单与权限相关联，通过权限配置 map 动态生成菜单栏；
+
+菜单栏分为左侧菜单栏和顶部菜单栏，通过配置菜单栏可以显示三种类型
+
+* 仅左侧菜单栏
+* 仅顶部菜单栏
+* 顶部菜单和左侧菜单
+  * 当同同时存在顶部菜单栏和左侧菜单时，将顶部菜单设置为一级菜单，左侧菜单设置为二级菜单
+
+
+
+## 登录校验
+
+HTTP 请求使用 [XHTTP | XW-UI ](https://sewar-x.github.io/X-UI/zh-CN/components/library/xhttp/使用.html) 插件，该插件是对 Axios 进行二次封装，加入了以下功能：
+
+| 功能                           | 介绍                                                         |
+| ------------------------------ | ------------------------------------------------------------ |
+| 消息提示                       | 成功/失败/错误等消息和模态弹窗提示 在浏览器端使用消息和模态弹窗提示 在node 端使用 console 打印 |
+| 忽略重复请求                   |                                                              |
+| 超时重试                       |                                                              |
+| 加入请求时间戳                 | 请求时间戳可以用于调试接口                                   |
+| 上传文件默认采用 formdata 格式 | 上传文件默认配置： `header:{Content-type: FORM_DATA = 'multipart/form-data;charset=UTF-8',}` |
+| 固定状态码提示和处理           |                                                              |
+| ajax 错误日志收集钩子          | `addAjaxErrorInfo`                                           |
+| 全局请求 token                 |                                                              |
+| **token 校验**                 |                                                              |
+| **token 刷新**                 | 传入 token 过期时间和时间间隔，在每次请求之前自动判断当前时间与 token 过期时间差小于指定刷新间隔时间，如果是，自动请求刷新 Token 接口刷新 Token，并将后续请求缓存；待刷新 Token 接口返回后，使用新的 token 请求缓存的请求。 |
+| 错误清除 token                 |                                                              |
+| 错误退出登录                   |                                                              |
+| 格式化返回格式                 | 格式化返回格式                                               |
+| 提供请求处理钩子               |                                                              |
+|                                | 请求之前处理配置: `beforeRequestHook`                        |
+|                                | 请求成功处理: `transformRequestData`                         |
+|                                | 请求失败处理: `requestCatch`                                 |
+|                                | 请求之前的拦截器: `requestInterceptors`                      |
+|                                | 请求之后的拦截器: `responseInterceptors`                     |
+|                                | 请求之前的拦截器错误处理: `requestInterceptorsCatch`         |
+|                                | 请求之后的拦截器错误处理: `responseInterceptorsCatch`        |
+
+
+
+## 权限和路由
+
+权限模块使用 [permission 插件 | XW-UI ](https://sewar-x.github.io/X-UI/zh-CN/components/library/vivien-permission/使用.html)  ，该插件提供以下功能：
+
+| 功能             | 介绍                                                     |
+| ---------------- | -------------------------------------------------------- |
+| 菜单路由权限控制 | 通过接口返回权限路由名称，控制当前登录用户的路由权限     |
+| 按钮级别权限控制 | 通过接口返回按钮权限列表名称，控制当前登录用户的按钮权限 |
+| 单点登录         | 使用当前插件的系统和其他系统相互登录                     |
 
 路由划分为异步路由和常规路由：
 
@@ -231,7 +271,76 @@ VITE_USE_XW_UI_PERMISSION=true
 
 
 
-## 权限
+## 样式隔离方案
+
+应用框架使用 样式前缀方式进行样式隔离。
+
+### 定义样式前缀
+
+样式前缀定义在 `src/styles/variables.module` 文件中：
+
+```less
+// 命名空间
+@adminNamespace: mainapp;
+// el命名空间
+@elNamespace: el;
+
+// 导出变量
+:export {
+  namespace: @adminNamespace;
+  elNamespace: @elNamespace;
+}
+
+```
+
+`@adminNamespace` 为应用样式前缀定义。
+
+### 使用样式前缀
+
+使用样式前缀需要修改两个地方：
+
+* html 标签类名中 使用样式前缀
+* css 类名 中使用样式前缀
+
+1. **html 标签类名**中使用样式前缀：
+
+在你的组件/页面中，引入 `useDesign` hooks：
+
+```js
+import { useDesign } from "@/hooks/web/useDesign";
+const { getPrefixCls } = useDesign();
+const prefixCls = getPrefixCls("你的组件名称");
+```
+
+在 html 标签中定义类名：
+
+```html
+ <div :class="[`${prefixCls}-container`]"></div>
+```
+
+2. **css 类名中使用样式前缀**
+
+```less
+<style scoped lang="less">
+@prefix-cls: ~"@{adminNamespace}-你的组件名称";
+.@{prefix-cls}-container {
+  width: 100%;
+  height: 100%;
+}
+</style>
+```
+
+最终形成效果如下：
+
+![](./docs/assets/images/样式隔离方案.png)
+
+
+
+
+
+
+
+
 
 ## 构建
 

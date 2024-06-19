@@ -25,14 +25,14 @@ export default {
 
   login: {
     邮箱: "Email",
-    用户名: "Username",
-    密码: "Password",
+    用户名: "UserName",
+    密码: "PassWord",
     请输入用户名: "Please input username",
     请输入密码: "Please input password",
     请输入邮箱: "Please input Email",
     用户名错误: "Username Error",
     邮箱格式错误: "Email Format Error",
-
+    其他登录方式: "Ohter Login Way",
     记住我: "Remember me",
     "忘记密码？": "Forget Password?",
   },

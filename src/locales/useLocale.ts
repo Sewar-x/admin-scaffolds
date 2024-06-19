@@ -4,7 +4,7 @@
 import type { LocaleType } from "#/config";
 
 import { i18n } from "./setupI18n";
-import { useLocaleStoreWithOut } from "$store/locale";
+import { useLocaleStoreWithOut } from "$store/common/locale";
 import { unref, computed } from "vue";
 import { loadLocalePool, setHtmlPageLang } from "./helper";
 
@@ -14,7 +14,7 @@ interface LangModule {
   dateLocaleName: string;
 }
 
-function setI18nLanguage(locale: LocaleType) {
+export function setI18nLanguage(locale: LocaleType) {
   const localeStore = useLocaleStoreWithOut();
 
   if (i18n.mode === "legacy") {

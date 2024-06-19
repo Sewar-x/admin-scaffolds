@@ -1,16 +1,19 @@
 <template>
   <div :class="[`${prefixCls}-container`]">
+    <div :class="[`${prefixCls}-locales`]" v-if="VITE_MULTIPLE_LANGUAGES === 'true'">
+      <LocalePicker :showText="true" />
+    </div>
     <el-card :class="[`${prefixCls}-panel`]">
       <template #header>
         <div :class="[`${prefixCls}-header`]">
-          <span>登录</span>
+          <span>{{ $t("登录") }}</span>
         </div>
       </template>
       <XForm :options="options"></XForm>
       <template #footer>
         <div :class="[`${prefixCls}-footer`]">
-          <el-button type="plain" link disabled> 其他登录方式 </el-button>
-          <el-button type="danger" link disabled> 忘记密码 </el-button>
+          <el-button type="plain" link disabled> {{ $t("其他登录方式") }}</el-button>
+          <el-button type="danger" link disabled> {{ $t("忘记密码？") }} </el-button>
         </div>
       </template>
     </el-card>
@@ -26,6 +29,11 @@ import { login } from "@/api/login";
 import requestSetting from "@/settings/requestSetting";
 import { useRouter } from "vue-router";
 import { useDesign } from "@/hooks/web/useDesign";
+import LocalePicker from "@/components/LocalePicker/index.vue";
+import projectSetting from "@/settings/projectSetting";
+import { $t } from "$locale";
+import { getAppEnvConfig } from "@/utils/env";
+const { VITE_MULTIPLE_LANGUAGES } = getAppEnvConfig();
 const { getPrefixCls } = useDesign();
 const prefixCls = getPrefixCls("login");
 const router = useRouter();
@@ -41,11 +49,11 @@ let data = reactive<RuleForm>({
 });
 
 const rules = reactive<FormRules<RuleForm>>({
-  username: [{ required: true, message: "请输入账号", trigger: "blur" }],
+  username: [{ required: true, message: $t("请输入用户名"), trigger: "blur" }],
   password: [
     {
       required: true,
-      message: "请输入密码",
+      message: $t("请输入密码"),
       trigger: "change",
     },
   ],
@@ -54,7 +62,7 @@ const rules = reactive<FormRules<RuleForm>>({
 const options: object = {
   mode: data,
   attr: {
-    "label-width": "50px",
+    "label-width": "65px",
     rules: rules,
   },
   items: [
@@ -62,7 +70,7 @@ const options: object = {
       {
         attr: {
           prop: "username",
-          label: "账号",
+          label: $t("用户名"),
         },
         component: {
           comp: "el-input",
@@ -73,7 +81,7 @@ const options: object = {
       {
         attr: {
           prop: "password",
-          label: "密码",
+          label: $t("密码"),
         },
         component: {
           comp: "el-input",
@@ -89,7 +97,7 @@ const options: object = {
         component: {
           comp: "el-button",
           content: {
-            text: "提交",
+            text: $t("登录"),
           },
           attr: {
             class: "login-button",
@@ -115,7 +123,7 @@ const submit = async (params: any) => {
     //存储 token 过期时间，注意存储的 token 过期时间和存储方案需要在 createXhttp 参数相同！
     cookieUtils.setItem(requestSetting.refreshTokenConfig.tokenExpiresKey, expire);
     router.push({
-      name: "authMenu1",
+      name: projectSetting.homePageName,
     });
   } catch (err) {
     console.error(err);
@@ -147,5 +155,10 @@ const submit = async (params: any) => {
       justify-content: space-between;
     }
   }
+}
+.@{prefix-cls}-locales {
+  position: fixed;
+  top: 35px;
+  right: 35px;
 }
 </style>

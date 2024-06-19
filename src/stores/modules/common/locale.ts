@@ -1,10 +1,16 @@
-import type { LocaleSetting, LocaleType } from "#/config";
-
 import { defineStore } from "pinia";
+import Storage from "@/utils/storage"
+import type { LocaleSetting, LocaleType } from "#/config";
 import { store } from "@/stores";
-
 import { localeSetting } from "@/settings/localeSetting";
-import { getLocale, setLocale } from "@/utils/locale";
+
+export function getLocale() {
+  return Storage.getLocalStorage(localeSetting.localeKey) as string;
+}
+
+export function setLocale(locale: object) {
+  return Storage.setLocalStorage(localeSetting.localeKey, locale);
+}
 
 const lsLocaleSetting = (getLocale() || localeSetting) as LocaleSetting;
 
