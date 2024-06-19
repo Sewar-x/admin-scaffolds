@@ -59,13 +59,5 @@ export default {
     返回列表: "Return List",
     更多: "More",
     复制: "Copy",
-  },
-
-  route: {
-    菜单栏1: "menu1",
-    菜单栏2: "menu2",
-    菜单栏3: "menu3",
-    菜单栏4: "menu4",
-    菜单栏5: "menu5",
-  },
+  }
 };

@@ -1,4 +1,5 @@
 import { Layout } from '@/router/layout'
+import { $t } from "$locale";
 import {
   Document,
   Location,
@@ -11,7 +12,7 @@ export default {
     hidden: false,
     redirect: "/auth-menus/authMenu1",
     meta: {
-        title: '权限菜单',
+        title: $t('权限菜单'),
         hideBreadcrumb: false,
         icon: Document
     },
@@ -22,7 +23,7 @@ export default {
           name: 'authMenu1',
           hidden: false,
           meta: {
-            title: '权限菜单1',
+            title:  $t('权限菜单1'),
             icon: Location
           }
         },
@@ -32,7 +33,7 @@ export default {
           name: 'authMenu2',
           hidden: false,
           meta: {
-            title: '权限菜单2',
+            title:  $t('权限菜单2'),
             icon: Location
           }
         }

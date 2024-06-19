@@ -1,5 +1,3 @@
-import { type Component, type Ref } from "vue";
-import { s as setWord } from "$locale";
 
 declare global {
   type T = any;

@@ -1,7 +1,7 @@
 /**
  * 无需权限同步加载的公共路由
  */
-
+import { $t } from "$locale";
 import type { AppRouteRecordRaw } from "@/router/types";
 import { PageEnum } from "@/enums/pageEnum";
 // 根路由
@@ -10,7 +10,7 @@ export const RootRoute: AppRouteRecordRaw = {
   name: "Root",
   redirect: PageEnum.BASE_LOGIN,
   meta: {
-    title: "首页",
+    title: $t("首页"),
   },
 };
 
@@ -20,7 +20,7 @@ export const LoginRoute: AppRouteRecordRaw = {
   name: "Login",
   component: () => import("@/views/login/index.vue"),
   meta: {
-    title: "登录",
+    title:  $t("登录"),
   },
 };
 

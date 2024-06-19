@@ -1,4 +1,5 @@
 import { Layout } from '@/router/layout'
+import { $t } from "$locale";
 import {
   Document,
   Setting,
@@ -11,7 +12,7 @@ export default {
     hidden: false,
     redirect: "/async-menus/asyncMenu1",
     meta: {
-        title: '异步菜单',
+        title: $t('异步菜单'),
         hideBreadcrumb: false,
         icon: Document
     },
@@ -22,7 +23,7 @@ export default {
           name: 'asyncMenu1',
           hidden: false,
           meta: {
-            title: '异步菜单1',
+            title: $t('异步菜单1'),
             icon: Setting
           }
         },
@@ -32,7 +33,7 @@ export default {
           name: 'asyncMenu2',
           hidden: false,
           meta: {
-            title: '异步菜单2',
+            title: $t('异步菜单2'),
             icon: Setting
           }
         },
@@ -42,7 +43,7 @@ export default {
           name: 'asyncMenu3',
           hidden: false,
           meta: {
-            title: '异步菜单3',
+            title: $t('异步菜单3'),
             icon: Setting
           }
         }

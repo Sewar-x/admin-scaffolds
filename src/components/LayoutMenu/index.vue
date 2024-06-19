@@ -1,10 +1,12 @@
 <template>
-  <LayoutMenu :options="options">
+  <LayoutMenu :options="options" :class="[`${prefixCls}`]">
     <template #sideHeader>
-      <img class="logo" :src="Logo" />
+      <img :class="[`${prefixCls}-logo`]" :src="Logo" />
     </template>
-    <template #sideFooter>
-      <img class="logo" :src="Logo" />
+    <template #topFooter>
+      <div :class="[`${prefixCls}-locales`]" v-if="VITE_MULTIPLE_LANGUAGES === 'true'">
+        <LocalePicker :showText="true" />
+      </div>
     </template>
   </LayoutMenu>
 </template>
@@ -15,6 +17,12 @@ import Logo from "/logo.svg";
 import ProjectConfig from "@/settings/projectSetting";
 import { routesStoreWithOut } from "@/stores/modules/common/routes";
 import { useRouter } from "vue-router";
+import LocalePicker from "@/components/LocalePicker/index.vue";
+import { getAppEnvConfig } from "@/utils/env";
+import { useDesign } from "@/hooks/web/useDesign";
+const { getPrefixCls } = useDesign();
+const prefixCls = getPrefixCls("layout");
+const { VITE_MULTIPLE_LANGUAGES } = getAppEnvConfig();
 const routeStore = routesStoreWithOut();
 const router = useRouter();
 const options = {
@@ -28,7 +36,15 @@ const options = {
 </script>
 
 <style scoped lang="less">
-.logo {
-  height: 60px;
+@prefix-cls: ~"@{adminNamespace}-layout";
+.@{prefix-cls} {
+  &-logo {
+    height: 60px;
+  }
+  :deep(.xw-ui-menus-footer) {
+  }
+  &-locales {
+    height: 20px;
+  }
 }
 </style>
