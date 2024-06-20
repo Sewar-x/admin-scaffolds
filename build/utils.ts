@@ -99,7 +99,7 @@ export function getRootPath(...dir: string[]) {
  * @param env
  */
 export const getConfigFileName = (env: Record<string, any>) => {
-  return `__PRODUCTION__${env.VITE_GLOB_APP_SHORT_NAME || "__APP"}__CONF__`
+  return `__PRODUCTION__${env.VITE_APP_TITLE || "__APP"}__CONF__`
     .toUpperCase()
     .replace(/\s/g, "");
 };

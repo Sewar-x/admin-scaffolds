@@ -1,8 +1,7 @@
 import type { ProjectConfig } from "#/config";
-import { getAppEnvConfig } from "@/utils/env"
 
 
-const { VITE_USE_ALL_ELEMENT_PLUS_STYLE, VITE_APP_TITLE } = getAppEnvConfig()
+const { VITE_USE_ALL_ELEMENT_PLUS_STYLE, VITE_APP_TITLE } = import.meta.env
 const setting: ProjectConfig = {
   // 项目名
   projectName: VITE_APP_TITLE,

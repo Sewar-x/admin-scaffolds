@@ -2,7 +2,6 @@
 import '@/plugins/unocss'
 // 引入全局样式
 import '@/styles/index.less'
-import { getAppEnvConfig } from "@/utils/env"
 
 import {
     initVue,
@@ -21,7 +20,7 @@ const {
     VITE_USE_MICRO_APP,
     VITE_USE_XW_UI_ELEMENT_PLUS,
     VITE_USE_XW_UI_PERMISSION
-} = getAppEnvConfig()
+} = import.meta.env
 
 async function bootstrap() {
     let route = null
@@ -41,11 +40,7 @@ async function bootstrap() {
     if (VITE_USE_XW_UI_PERMISSION === 'true') {
         await initXWPermission(app);
     }
-    // 使用 微前端框架 micro-app
-    if (VITE_USE_MICRO_APP === 'true') {
-        await initMicroApp(app);
-    }
-        
+   
     // 加载自定义组件
     await initDefineComponent(app);
 
@@ -54,6 +49,10 @@ async function bootstrap() {
         await initXWElementPlus(app);
     }
 
+     // 使用 微前端框架 micro-app
+    if (VITE_USE_MICRO_APP === 'true') {
+        await initMicroApp(app);
+    }
 
     app.mount("#app");
 }

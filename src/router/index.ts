@@ -10,7 +10,7 @@ import type { App } from "vue";
 // 创建一个可以被 Vue 应用程序使用的路由实例
 export const router = createRouter({
   // 创建一个 hash 历史记录。
-  history: createWebHashHistory(import.meta.env.VITE_OUT_DIR),
+  history: createWebHashHistory(import.meta.env.VITE_BASE_PATH),
   // 应该添加到路由的初始路由列表。
   routes: [...asyncRoutes, ...basicRoutes] as unknown as RouteRecordRaw[],
   // 是否应该禁止尾部斜杠。默认为 false

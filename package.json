@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "i": "pnpm install",
+    "preview": "pnpm vite preview",
     "dev": "cross-env NODE_ENV=dev vite --mode dev",
     "dev:test": "cross-env NODE_ENV=test vite --mode test",
     "dev:prod": "cross-env NODE_ENV=production vite --mode production",

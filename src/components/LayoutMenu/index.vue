@@ -18,11 +18,10 @@ import ProjectConfig from "@/settings/projectSetting";
 import { routesStoreWithOut } from "@/stores/modules/common/routes";
 import { useRouter } from "vue-router";
 import LocalePicker from "@/components/LocalePicker/index.vue";
-import { getAppEnvConfig } from "@/utils/env";
 import { useDesign } from "@/hooks/web/useDesign";
 const { getPrefixCls } = useDesign();
 const prefixCls = getPrefixCls("layout");
-const { VITE_MULTIPLE_LANGUAGES } = getAppEnvConfig();
+const { VITE_MULTIPLE_LANGUAGES } = import.meta.env;
 const routeStore = routesStoreWithOut();
 const router = useRouter();
 const options = {
@@ -41,9 +40,11 @@ const options = {
   &-logo {
     height: 60px;
   }
-  :deep(.xw-ui-menus-footer) {
-  }
+
   &-locales {
+    position: fixed;
+    right: 25px;
+    top: 25px;
     height: 20px;
   }
 }
