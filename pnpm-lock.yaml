@@ -39,9 +39,6 @@ devDependencies:
   '@commitlint/config-conventional':
     specifier: ^19.2.2
     version: 19.2.2
-  '@rushstack/eslint-patch':
-    specifier: ^1.8.0
-    version: 1.8.0
   '@tsconfig/node20':
     specifier: ^20.1.4
     version: 20.1.4
@@ -105,9 +102,6 @@ devDependencies:
   npm-run-all2:
     specifier: ^6.1.2
     version: 6.1.2
-  prettier:
-    specifier: ^3.2.5
-    version: 3.2.5
   rollup:
     specifier: ^4.18.0
     version: 4.18.0
@@ -1507,10 +1501,6 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
-
-  /@rushstack/eslint-patch@1.8.0:
-    resolution: {integrity: sha512-0HejFckBN2W+ucM6cUOlwsByTKt9/+0tWhqUffNIcHqCXkthY/mZ7AuYPK/2IIaGWhdl0h+tICDO0ssLMd6XMQ==}
-    dev: true
 
   /@sindresorhus/is@0.7.0:
     resolution: {integrity: sha512-ONhaKPIufzzrlNbqtWFFd+jlnemX6lJAgq9ZeiZtS7I1PIf/la7CW4m83rTXRnVnsMbW2k56pGYu7AUFJD9Pow==}
