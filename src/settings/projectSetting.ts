@@ -1,5 +1,5 @@
 import type { ProjectConfig } from "#/config";
-
+import { isBaseApp } from "@/utils/microapp"
 
 const { VITE_USE_ALL_ELEMENT_PLUS_STYLE, VITE_APP_TITLE } = import.meta.env
 const setting: ProjectConfig = {
@@ -8,7 +8,7 @@ const setting: ProjectConfig = {
   loadOnDemandEl: VITE_USE_ALL_ELEMENT_PLUS_STYLE != 'true',
   // element ui size
   elementSize: "mini",
-  layoutMode: "topAside", //'top' | 'aside' | 'topAside' | 'none'
+  layoutMode: isBaseApp()? "topAside": "none", //'top' | 'aside' | 'topAside' | 'none'
   defaultActive: 'authMenus', // 默认首页路由名称
   homePageName: "authMenu1", // 首页路由名称
 };

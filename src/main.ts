@@ -36,6 +36,10 @@ async function bootstrap() {
     }
 
     route = await initRoute(app);
+    // 使用 微前端框架 micro-app
+    if (VITE_USE_MICRO_APP === 'true') {
+        await initMicroApp(app);
+    }
     // 使用 路由权限控制
     if (VITE_USE_XW_UI_PERMISSION === 'true') {
         await initXWPermission(app);
@@ -49,10 +53,7 @@ async function bootstrap() {
         await initXWElementPlus(app);
     }
 
-     // 使用 微前端框架 micro-app
-    if (VITE_USE_MICRO_APP === 'true') {
-        await initMicroApp(app);
-    }
+ 
 
     app.mount("#app");
 }

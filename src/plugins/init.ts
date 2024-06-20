@@ -1,4 +1,6 @@
 import type { App } from 'vue'
+import { defalutLifeCycles } from "@/utils/microapp"
+
 // 初始化 Vue 实例
 export const initVue = async (): Promise<App> => {
     const App = await import("@/App.vue")
@@ -66,28 +68,12 @@ export const initDefineComponent = async (app: App) => {
 
 // 初始化微前端框架
 export const initMicroApp = async (app: App) => {
-    console.log('app ==', app)
     return await import("@micro-zoe/micro-app").then(async (microApp: any) => {
-        microApp.start({
-            lifeCycles: {
-                created() {
-                    console.log('created 全局监听')
-                },
-                beforemount() {
-                    console.log('beforemount 全局监听')
-                },
-                mounted() {
-                    console.log('mounted 全局监听')
-                },
-                unmount() {
-                    console.log('unmount 全局监听')
-                },
-                error() {
-                    console.log('error 全局监听')
-                }
-            }
+        microApp.default.start({
+            lifeCycles: defalutLifeCycles
 
         })
+        console.log('=====microApp初始化完成=======')
         return microApp
     });
 }
