@@ -1,4 +1,3 @@
-import type { App } from 'vue'
 import microApp from '@micro-zoe/micro-app'
 import microAppUtils from './utils'
 import { initVueRouter } from '@/plugins/micro-app/router'
@@ -6,7 +5,7 @@ import { mainAppConfigs } from './appConfigs'
 
 const { getMicroApp, isBaseApp } = microAppUtils
 
-export async function setupMicroApp(app: App, router?: any, store?: any) {
+export async function setupMicroApp(app: object, router?: any, store?: any) {
   // 为主应用时，注册主应用
   if (isBaseApp) {
     // 注册主应用路由,

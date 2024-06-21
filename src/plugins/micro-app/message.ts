@@ -7,7 +7,7 @@
  */
 import { EventCenterForMicroApp, getAllApps } from '@micro-zoe/micro-app'
 import microAppUtils from './utils'
-import { mainAppConfigs, subAppConfigs } from './appConfigs'
+import { mainAppConfigs } from './appConfigs'
 
 const { getMicroAppName, getMicroApp, isBaseApp } = microAppUtils
 
