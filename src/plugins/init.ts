@@ -59,9 +59,9 @@ export const initDefineComponent = async (app: App) => {
 }
 
 // 初始化微前端框架
-export const initMicroApp = async (app: App, router: any) => {
+export const initMicroApp = async (app: App, router?: any, store?: any) => {
   return await import('@/plugins/micro-app/index').then(async (microAppModule: any) => {
-    return await microAppModule.setupMicroApp(app, router)
+    return await microAppModule.setupMicroApp(app, router, store)
   })
 }
 

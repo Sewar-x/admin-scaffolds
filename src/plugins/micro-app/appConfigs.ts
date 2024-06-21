@@ -5,11 +5,17 @@
  *   }
  */
 import ProjectSetting from '@/settings/projectSetting'
-export const subAppConfigs = {}
+export const subAppConfigs: {
+  [key: string]: any
+} = {}
 
-export const mainAppConfigs = {
-  name: ProjectSetting.projectName,
+// 主应用配置项
+export const mainAppConfigs: {
+  [key: string]: any
+} = {
+  name: ProjectSetting.projectName, //应用名称
   'disable-sandbox': false,
+  iframe: true,
   lifeCycles: {
     created(e, appName) {
       console.log(`子应用${appName}被创建`)

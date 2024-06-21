@@ -5,7 +5,7 @@
  * 在此处会自动识别该应用为主应用还是子应用，因此需要统一的通信方法。
  * 为了提供统一的通信方法，需要对以上通信方法做二次封装。
  */
-import { EventCenterForMicroApp } from '@micro-zoe/micro-app'
+import { EventCenterForMicroApp, getAllApps } from '@micro-zoe/micro-app'
 import microAppUtils from './utils'
 import { mainAppConfigs, subAppConfigs } from './appConfigs'
 
@@ -30,8 +30,9 @@ class MicroAppMessage {
     if (disableSandbox) {
       if (isBaseApp) {
         //主应用：为子应用初始化通信对象
-        for (let key in subAppConfigs) {
-          const appName = getMicroAppName(key)
+        // getAllApps: https://micro-zoe.github.io/micro-app/docs.html#/zh-cn/api?id=getallapps
+        for (let appName of getAllApps()) {
+          // const appName = getMicroAppName(key)
           window[`eventCenterForApp${appName}`] = new EventCenterForMicroApp(appName)
         }
       } else {
@@ -53,7 +54,7 @@ class MicroAppMessage {
    */
   sendMessage({ data, appName, callback }: MessageParamsType): void {
     if (this.isBaseApp) {
-      this.app.setData(appName, data, callback)
+      this.app.setData(appName, data)
     } else {
       this.app.dispatch(data, callback)
     }
