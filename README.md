@@ -67,11 +67,13 @@
 * 插件使用 Vue.js 的插件机制添加到项目中；
 * 在文件 `src/plugins/init` 提供插件的统一初始化方法，插件初始化方法在 `src/main.ts` 文件中使用。
 
+### HTTP 插件
 
+HTTP  插件是使用 [XHTTP | XW-UI ](https://sewar-x.github.io/X-UI/zh-CN/components/library/xhttp/使用.html) 插件，该插件是对 Axios 进行二次封装，增加了 登录 Token 管理相关逻辑。
 
-### xw-ui/permission 插件
+### Permission 插件
 
-xw-ui/permission 插件是使用 vivien-permission 插件，[vivien-permission](https://sewar-x.github.io/X-UI/zh-CN/components/library/vivien-permission/%E4%BD%BF%E7%94%A8.html) 插件是一个基于后台管理系统中的路由菜单权限控制系统，通过 vue-router 全局控制后台管理系统的菜单权限。
+权限控制插件是使用 [permission 插件 | XW-UI ](https://sewar-x.github.io/X-UI/zh-CN/components/library/vivien-permission/使用.html) 插件，[permission 插件 | XW-UI ](https://sewar-x.github.io/X-UI/zh-CN/components/library/vivien-permission/使用.html) 插件是一个基于后台管理系统中的路由菜单权限控制系统，通过 vue-router 全局控制后台管理系统的菜单权限。
 
 **插件功能**：
 
@@ -168,15 +170,15 @@ VITE_USE_XW_UI_PERMISSION=true
 
 如果你想关闭该插件使用，使 `VITE_USE_XW_UI_PERMISSION=false` 即可。 
 
+### XElementPlus 组件
 
+[XElementPlus 组件总览 | XW-UI ](https://sewar-x.github.io/X-UI/zh-CN/components/element-plus/Vue3-基础组件/Vue3-组件总览.html) 是基于 Element-Plus 二次封装，使用 JSON Scheme 配置化生成式组件库。
 
-
-
-### Element-Plus 插件
-
-
+### Element-Plus 组件
 
 ### UnoCSS 插件
+
+### Micro-App 插件
 
 ### 国际化
 

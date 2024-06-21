@@ -71,3 +71,8 @@ export const initXWPermission = async (app: App) => {
     return await permissionModule.setupXWPermission(app)
   })
 }
+
+// 使用路由权限控制
+export const initUnocss = async (app: App) => {
+  return await import('@/plugins/unocss/index')
+}
