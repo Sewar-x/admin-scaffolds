@@ -13,5 +13,6 @@ export async function setupMicroApp(app: App, router: any) {
   })
   console.log('=====microApp初始化完成=======')
   initVueRouter(router)
-  return microApp
+  // 基座应用返回 microApp 实例， 子应用中返回 window.microApp
+  return isBaseApp ? microApp : window && window.microApp ? window.microApp : microApp
 }
