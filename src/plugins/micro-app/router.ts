@@ -7,7 +7,7 @@
    docs: https://micro-zoe.github.io/micro-app/docs.html#/zh-cn/router?id=%e5%af%bc%e8%88%aa
  */
 import microApp from '@micro-zoe/micro-app'
-import microAppUtils from '@/utils/microapp'
+import microAppUtils from './utils'
 
 const { isMicroApp, isBaseApp } = microAppUtils
 

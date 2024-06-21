@@ -6,7 +6,7 @@
 </template>
 <script setup lang="ts">
 import { useDesign } from "@/hooks/web/useDesign";
-import ProjectSetting from "@/settings/projectSetting";
+import { MicroAppName } from "@/plugins/micro-app/utils";
 const props = defineProps<{
   options: {
     [key: string]: any;
@@ -14,6 +14,6 @@ const props = defineProps<{
 }>();
 const { getPrefixCls } = useDesign();
 const prefixCls = getPrefixCls("micro-app");
-const name = `${ProjectSetting.projectName}-vue-${props.options?.name}`;
+const name = MicroAppName(props.options?.name);
 </script>
 <style></style>

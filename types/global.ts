@@ -37,7 +37,6 @@ declare global {
     VITE_USE_CSS_SPLIT: boolean
     VITE_USE_ONLINE_ICON: boolean,
     VITE_USE_MICRO_APP: boolean,
-    VITE_MICRO_IS_BASE_APP: boolean,
     VITE_MULTIPLE_LANGUAGES: boolean,
     VITE_ASSETS_DIR: string,
     VITE_DEV_PORT: string,

@@ -13,7 +13,6 @@ import {
   initXWPermission,
   initUnocss
 } from '@/plugins/init'
-import GlobalData from '@/utils/globalData'
 const {
   VITE_MULTIPLE_LANGUAGES,
   VITE_USE_MICRO_APP,
@@ -25,13 +24,11 @@ const {
 async function bootstrap() {
   let router = null
   let store = null
-  let microApp = null
   const app = await initVue()
   // 初始化 elementPlus
   await initElementPlus(app)
   // 初始化 store
   store = await initStore(app)
-  GlobalData.setState('store', store)
   // 使用 unocss
   if (VITE_USE_UNOCSS === 'true') {
     await initUnocss(app)
@@ -42,11 +39,9 @@ async function bootstrap() {
   }
   // 使用 Route
   router = await initRoute(app)
-  GlobalData.setState('router', router)
   // 使用 微前端框架 micro-app
   if (VITE_USE_MICRO_APP === 'true') {
-    microApp = await initMicroApp(app, router)
-    GlobalData.setState('microApp', microApp)
+    await initMicroApp(app, router)
   }
   // 使用 路由权限控制
   if (VITE_USE_XW_UI_PERMISSION === 'true') {

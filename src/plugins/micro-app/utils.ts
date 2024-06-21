@@ -1,7 +1,8 @@
 /**
  * 微前端相关函数
  */
-
+import microApp from '@micro-zoe/micro-app'
+import ProjectSetting from '@/settings/projectSetting'
 /**
  * 判断应用是否在微前端环境中
  * @returns
@@ -23,23 +24,19 @@ export function IsBaseApp(): boolean {
   if (!IsMicroApp()) {
     return true
   }
-  if (import.meta?.env) {
-    const { VITE_MICRO_IS_BASE_APP } = import.meta.env
-    return VITE_MICRO_IS_BASE_APP === 'true'
-  } else {
-    return window.__MICRO_APP_BASE_APPLICATION__ || true
-  }
+  return (window && window.__MICRO_APP_BASE_APPLICATION__) || true
 }
 
 /**
  * 应用名称
  * @returns
  */
-export function MicroAppName(): string {
-  if (IsMicroApp()) {
+export function MicroAppName(name?: string): string {
+  const isMicroApp = IsMicroApp()
+  if (isMicroApp && window?.__MICRO_APP_NAME__) {
     return window.__MICRO_APP_NAME__
   }
-  return import.meta?.env ? import.meta.env.VITE_APP_TITLE : 'MainApp'
+  return name ? `${ProjectSetting.projectName}-${name}` : ProjectSetting.projectName
 }
 
 /**
@@ -65,31 +62,20 @@ export function MicroAppPublicPath(): boolean {
 }
 
 /**
- * 默认生命周期
+ *
+ * @returns
  */
-export const defalutLifeCycles = {
-  created(e, appName) {
-    console.log(`子应用${appName}被创建`)
-  },
-  beforemount(e, appName) {
-    console.log(`子应用${appName}即将渲染`)
-  },
-  mounted(e, appName) {
-    console.log(`子应用${appName}已经渲染完成`)
-  },
-  unmount(e, appName) {
-    console.log(`子应用${appName}已经卸载`)
-  },
-  error(e, appName) {
-    console.log(`子应用${appName}加载出错`)
-  }
+export function getMicroApp(): object {
+  const isBaseApp = IsBaseApp()
+  // 基座应用返回 microApp 实例， 子应用中返回 window.microApp
+  return isBaseApp ? microApp : window && window.microApp ? window.microApp : microApp
 }
 
 export default {
   isMicroApp: IsMicroApp(),
   isBaseApp: IsBaseApp(),
-  microAppName: MicroAppName(),
   microAppBaseRoute: MicroAppBaseRoute(),
   microAppPublicPath: MicroAppPublicPath(),
-  defalutLifeCycles
+  getMicroAppName: MicroAppName,
+  getMicroApp: getMicroApp
 }

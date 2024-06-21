@@ -1,5 +1,5 @@
 import type { ProjectConfig } from '#/config'
-import microAppUtils from '@/utils/microapp'
+import microAppUtils from '@/plugins/micro-app/utils'
 
 const { VITE_USE_ALL_ELEMENT_PLUS_STYLE, VITE_APP_TITLE } = import.meta.env
 const setting: ProjectConfig = {
