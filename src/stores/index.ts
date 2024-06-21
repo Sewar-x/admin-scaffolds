@@ -8,6 +8,7 @@ store.use(piniaPluginPersistedstate)
 
 export const setupStore = (app: App<Element>) => {
   app.use(store)
+  return store
 }
 
 export { store }

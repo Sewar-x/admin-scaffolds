@@ -6,7 +6,7 @@
  * 判断应用是否在微前端环境中
  * @returns
  */
-export function isMicroApp(): boolean {
+export function IsMicroApp(): boolean {
   if (import.meta?.env) {
     const { VITE_USE_MICRO_APP } = import.meta.env
     return VITE_USE_MICRO_APP === 'true'
@@ -19,8 +19,8 @@ export function isMicroApp(): boolean {
  * 判断应用是否是主应用
  * @returns
  */
-export function isBaseApp(): boolean {
-  if (!isMicroApp()) {
+export function IsBaseApp(): boolean {
+  if (!IsMicroApp()) {
     return true
   }
   if (import.meta?.env) {
@@ -35,8 +35,8 @@ export function isBaseApp(): boolean {
  * 应用名称
  * @returns
  */
-export function microAppName(): string {
-  if (isMicroApp()) {
+export function MicroAppName(): string {
+  if (IsMicroApp()) {
     return window.__MICRO_APP_NAME__
   }
   return import.meta?.env ? import.meta.env.VITE_APP_TITLE : 'MainApp'
@@ -46,8 +46,8 @@ export function microAppName(): string {
  * 子应用的基础路由
  * @returns
  */
-export function microAppBaseRoute(): boolean {
-  if (isMicroApp()) {
+export function MicroAppBaseRoute(): boolean {
+  if (IsMicroApp()) {
     return window.__MICRO_APP_BASE_ROUTE__
   }
   return import.meta?.env ? import.meta.env.VITE_BASE_PATH : '/'
@@ -57,8 +57,8 @@ export function microAppBaseRoute(): boolean {
  * 子应用的基础路由
  * @returns
  */
-export function microAppPublicPath(): boolean {
-  if (isMicroApp()) {
+export function MicroAppPublicPath(): boolean {
+  if (IsMicroApp()) {
     return window.__MICRO_APP_PUBLIC_PATH__
   }
   return import.meta?.env ? import.meta.env.VITE_BASE_PATH : '/'
@@ -83,4 +83,13 @@ export const defalutLifeCycles = {
   error(e, appName) {
     console.log(`子应用${appName}加载出错`)
   }
+}
+
+export default {
+  isMicroApp: IsMicroApp(),
+  isBaseApp: IsBaseApp(),
+  microAppName: MicroAppName(),
+  microAppBaseRoute: MicroAppBaseRoute(),
+  microAppPublicPath: MicroAppPublicPath(),
+  defalutLifeCycles
 }

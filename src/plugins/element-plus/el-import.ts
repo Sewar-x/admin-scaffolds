@@ -1,14 +1,14 @@
-import type { App } from "vue";
+import type { App } from 'vue'
 
-import setting from "@/settings/projectSetting";
+import setting from '@/settings/projectSetting'
 
-import fullLoadEl from "./fullLoad";
-import loadOnRemand from "./loadOnDemand";
+import fullLoadEl from './fullLoad'
+import loadOnRemand from './loadOnDemand'
 
 export function setupElementPlus(app: App) {
   if (setting.loadOnDemandEl) {
-    loadOnRemand(app);
+    return loadOnRemand(app)
   } else {
-    fullLoadEl(app, { size: setting.elementSize });
+    return fullLoadEl(app, { size: setting.elementSize })
   }
 }
