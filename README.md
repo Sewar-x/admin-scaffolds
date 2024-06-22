@@ -180,6 +180,8 @@ VITE_USE_XW_UI_PERMISSION=true
 
 ### Micro-App 插件
 
+micro-app 插件是对 [MicroApp](https://micro-zoe.github.io/micro-app/) 的二次封装。由于 micro-app 在微前端应用中，对作为基座的应用和作为子应用的配置和方法不同。该模板为了提供统一的 micro-app 配置，需要对 micro-app 二次封装，以屏蔽在基座应用和子应用时的配置和方法差异。模板提供统一的参数配置，将模板配置为 微前端的基座应用 或 子应用。
+
 ### 国际化
 
 ### 主题色
