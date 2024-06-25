@@ -20,7 +20,7 @@ export const initRoute = async (app: App) => {
 
 // 初始化 i18n
 export const initI18n = async (app: App) => {
-  return await import('@/locales/setupI18n').then(async (i18nModule: any) => {
+  return await import('@/plugins/locales/setupI18n').then(async (i18nModule: any) => {
     // 多语言配置
     return await i18nModule.setupI18n(app)
   })

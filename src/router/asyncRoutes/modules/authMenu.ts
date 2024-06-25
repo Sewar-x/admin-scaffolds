@@ -1,5 +1,5 @@
 import { Layout } from '@/router/layout'
-import { $t } from "$locale";
+import { $t } from "@/plugins/locales/setupLocale";
 import {
   Document,
   Location,

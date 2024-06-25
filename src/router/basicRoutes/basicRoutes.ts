@@ -1,7 +1,7 @@
 /**
  * 无需权限同步加载的公共路由
  */
-import { $t } from "$locale";
+import { $t } from "@/plugins/locales/setupLocale";
 import type { AppRouteRecordRaw } from "@/router/types";
 import { PageEnum } from "@/enums/pageEnum";
 // 根路由

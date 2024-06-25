@@ -8,7 +8,7 @@
 import { XDropdown } from "xw-ui/element-plus";
 import { unref, computed } from "vue";
 import type { LocaleType } from "#/config";
-import { useLocale } from "@/locales/useLocale";
+import { useLocale } from "@/plugins/locales/useLocale";
 import { LOCALE } from "@/settings/localeSetting";
 
 defineProps<{

@@ -1,5 +1,5 @@
 import { useLocaleStoreWithOut } from "$store/common/locale";
-import { i18n } from "@/locales/setupI18n";
+import { i18n } from "@/plugins/locales/setupI18n";
 const locale = useLocaleStoreWithOut().getLocale;
 
 export function $t(word: string) {

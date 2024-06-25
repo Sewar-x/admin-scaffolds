@@ -51,7 +51,7 @@
         "./types/*"
       ],
       "$locale": [
-        "./src/locales/setupLocale.ts"
+        "src/plugins/plugins/locales/setupLocale.ts"
       ],
       "$store/*": [
         "./src/stores/modules/*"

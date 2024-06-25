@@ -52,7 +52,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       alias: {
         "@": fileURLToPath(new URL("./src", url)), // 源文件目录别名
         "#": fileURLToPath(new URL("./types", url)), // 类型定义文件目录别名
-        $locale: fileURLToPath(new URL("./src/locales/setupLocale.ts", url)), // 多语言翻译函数别名
+        $locale: fileURLToPath(new URL("./src/plugins/locales/setupLocale.ts", url)), // 多语言翻译函数别名
         $store: fileURLToPath(new URL("./src/stores/modules", url)), // Store 文件别名
         $styleVariable: fileURLToPath(new URL("./src/style/variable.module.less", url)), // 全局样式文件别名
       },
