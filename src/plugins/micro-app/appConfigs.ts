@@ -7,7 +7,12 @@
 import ProjectSetting from '@/settings/projectSetting'
 export const subAppConfigs: {
   [key: string]: any
-} = {}
+} = {
+  'vue-admin-app': {
+    name: 'vue-app',
+    url: 'http://localhost:4000/'
+  }
+}
 
 // 主应用配置项
 export const mainAppConfigs: {

@@ -50,7 +50,8 @@ export default [
                         'asyncMenus',
                         'asyncMenu1',
                         'asyncMenu2',
-                        'asyncMenu3'
+                        'asyncMenu3',
+                        'vueAdminApp',
                     ], // 菜单权限名称列表
                     rule: [],// 按钮级别权限
                 }
