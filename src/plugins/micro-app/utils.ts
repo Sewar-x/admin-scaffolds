@@ -24,11 +24,7 @@ export function IsBaseApp(): boolean {
   if (!IsMicroApp()) {
     return true
   }
-  return (
-    import.meta?.env.VITE_BASE_MICRO_APP ||
-    (window && window.__MICRO_APP_BASE_APPLICATION__) ||
-    true
-  )
+  return import.meta?.env.VITE_BASE_MICRO_APP
 }
 
 /**
