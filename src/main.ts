@@ -1,5 +1,6 @@
 // 引入全局样式
 import '@/styles/index.less'
+import { reloadHacker } from 'xw-ui/permission'
 
 import {
   initVue,
@@ -46,6 +47,7 @@ async function bootstrap() {
   // 使用 路由权限控制
   if (VITE_USE_XW_UI_PERMISSION === 'true') {
     await initXWPermission(app)
+    await reloadHacker()
   }
   // 加载自定义组件
   await initDefineComponent(app)

@@ -9,6 +9,7 @@ import { configElementPlugin } from "./element";
 import { configAutoImportPlugin } from "./autoImport";
 import { configSvgIconsPlugin } from "./svgSprite";
 import { configImageminPlugin } from "./imagemin";
+import { configImagetoolsPlugin } from "./imagetools";
 import { configCompressPlugin } from "./compress";
 import { configMockPlugin } from "./mock";
 
@@ -28,7 +29,8 @@ export function createVitePlugin(viteEnv: ViteEnv, isBuild: boolean) {
     VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE,
     VITE_USE_ALL_ELEMENT_PLUS_STYLE,
     VITE_USE_MICRO_APP,
-    VITE_USE_UNOCSS
+    VITE_USE_UNOCSS,
+    VITE_USE_IMAGETOOLS
   } = viteEnv;
 
   const vitePlugins: (PluginOption | PluginOption[])[] = [
@@ -61,10 +63,13 @@ export function createVitePlugin(viteEnv: ViteEnv, isBuild: boolean) {
   
   // vite-plugin-svg-icons
   vitePlugins.push(configSvgIconsPlugin(isBuild));
+  // vite-imagetools
+  VITE_USE_IMAGETOOLS && vitePlugins.push(configImagetoolsPlugin());
 
   // vite-plugin-mock
   VITE_USE_MOCK && vitePlugins.push(configMockPlugin(isBuild));
 
+  
 
   if (isBuild) {
     // vite-plugin-imagemin 图片压缩
