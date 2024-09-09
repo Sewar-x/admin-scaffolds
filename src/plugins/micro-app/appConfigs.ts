@@ -1,8 +1,9 @@
-export const env = import.meta.env.MODE
+export const env = import.meta.env.VITE_NODE_ENV as string
+
 import ProjectSetting from '@/settings/projectSetting'
 
 const microAppUrl = {  
-  oldApp: {  
+oldApp: {  
       development: 'http://localhost:8080/#/',  
       test: 'https://test.example.com/oldApp/',  
       production: 'https://www.example.com/oldApp/'  
@@ -12,7 +13,7 @@ const microAppUrl = {
       test: 'https://test.example.com/newApp/',  
       production: 'https://www.example.com/newApp/'  
     },  
-  };  
+}
 
 export const subAppConfigs = {
   'oldApp': {
