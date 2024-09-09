@@ -13,7 +13,7 @@ export default {
     title: $t('Vue Admin应用'),
     hideBreadcrumb: false,
     icon: Document,
-    microAppOptions: subAppConfigs['vue-admin-app']
+    microAppOptions: subAppConfigs['oldApp']
   },
   children: []
 }

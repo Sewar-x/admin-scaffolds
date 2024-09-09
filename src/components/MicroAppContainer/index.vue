@@ -6,7 +6,7 @@
 </template>
 <script setup lang="ts">
 import { useDesign } from "@/hooks/web/useDesign";
-import { MicroAppName } from "@/plugins/micro-app/utils";
+import microAppUtils from "@/plugins/micro-app/utils";
 const props = defineProps<{
   options: {
     [key: string]: any;
@@ -14,6 +14,6 @@ const props = defineProps<{
 }>();
 const { getPrefixCls } = useDesign();
 const prefixCls = getPrefixCls("micro-app");
-const name = MicroAppName(props.options?.name);
+const name = microAppUtils?.MicroAppName(props.options?.name);
 </script>
 <style></style>

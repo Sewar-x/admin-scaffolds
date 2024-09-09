@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { watchEffect, ref, type Ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { LayoutMenu } from "xw-ui/element-plus";
+import { LayoutMenu } from "sewen-ui/element-plus";
 import Logo from "/logo.svg";
 import ProjectConfig from "@/settings/projectSetting";
 import { routesStoreWithOut } from "@/stores/modules/common/routes";
@@ -83,6 +83,9 @@ watchEffect(async () => {
 
   :deep(.layout-content-main) {
     padding: 0;
+  }
+  :deep(.el-menu--vertical) {
+    height:100%;
   }
 }
 </style>

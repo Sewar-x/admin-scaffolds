@@ -1,41 +1,56 @@
-/**
- * 所有子应用配置项,导出对象为：
- *   {
- *    子应用名称： 子应用选项
- *   }
- */
+export const env = import.meta.env.MODE
 import ProjectSetting from '@/settings/projectSetting'
-export const subAppConfigs: {
-  [key: string]: any
-} = {
-  'vue-admin-app': {
-    name: 'vue-app',
-    url: 'http://localhost:4000/'
+
+const microAppUrl = {  
+  oldApp: {  
+      development: 'http://localhost:8080/#/',  
+      test: 'https://test.example.com/oldApp/',  
+      production: 'https://www.example.com/oldApp/'  
+    },  
+    newApp: {  
+      development: 'http://localhost:8080/#/', 
+      test: 'https://test.example.com/newApp/',  
+      production: 'https://www.example.com/newApp/'  
+    },  
+  };  
+
+export const subAppConfigs = {
+  'oldApp': {
+      name: 'oldApp',
+      url: microAppUrl['oldApp'][env],
+      'keep-alive': true
+  },
+  'newApp': {
+      name: 'newApp',
+      url: microAppUrl['newApp'][env],
+      'keep-alive': true
   }
 }
 
-// 主应用配置项
-export const mainAppConfigs: {
-  [key: string]: any
-} = {
-  name: ProjectSetting.projectName, //应用名称
-  'disable-sandbox': false,
-  iframe: true,
-  lifeCycles: {
-    created(e, appName) {
-      console.log(`子应用${appName}被创建`)
+const microAppSetting = {
+    projectName: ProjectSetting.projectName,
+    isBaseApp: true, // 标记当前应用为主应用
+    basePath: '/', // 打包路径或其他基础路径 
+    disableSandbox: false, // 是否禁用沙箱
+    iframe: true, // 是否使用 iframe
+    lifeCycles: {
+      created (e, appName) {
+        console.log(`===子应用${appName}被创建===`)
+      },
+      beforemount (e, appName) {
+        console.log(`===子应用${appName}即将渲染===`)
+      },
+      mounted (e, appName) {
+        console.log(`===子应用${appName}已经渲染完成===`,e)
+      },
+      unmount (e, appName) {
+        console.log(`===子应用${appName}已经卸载===`)
+      },
+      error (e, appName) {
+        console.log(`===子应用${appName}加载出错===`)
+      }
     },
-    beforemount(e, appName) {
-      console.log(`子应用${appName}即将渲染`)
-    },
-    mounted(e, appName) {
-      console.log(`子应用${appName}已经渲染完成`)
-    },
-    unmount(e, appName) {
-      console.log(`子应用${appName}已经卸载`)
-    },
-    error(e, appName) {
-      console.log(`子应用${appName}加载出错`)
-    }
-  }
+    subAppConfigs  
 }
+
+export default microAppSetting

@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import type { FormRules } from "element-plus";
-import { XForm } from "xw-ui/element-plus";
+import { XForm } from "sewen-ui/element-plus";
 import { reactive } from "vue";
 import { cookieUtils } from "@/plugins/storage";
 import { login } from "@/api/login";

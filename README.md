@@ -1,5 +1,5 @@
 # admin-scaffolds
-基于 vue3 + typescript + element-plus + xw-ui 的后台管理系统的脚手架
+基于 vue3 + typescript + element-plus + sewen-ui 的后台管理系统的脚手架
 
 ## 功能
 
@@ -40,12 +40,12 @@
 |          | 样式隔离                              | 公共样式前缀                                                 |
 | 路由管理 | 顶部菜单栏、侧边栏                    | Vue-Router                                                   |
 | 权限管理 | 菜单权限、按钮/组件权限               |                                                              |
-| 组件库   | JSON Scheme 公共组件库                | [xw-ui](https://sewar-x.github.io/X-UI/)                     |
+| 组件库   | JSON Scheme 公共组件库                | [sewen-ui](https://sewar-x.github.io/X-UI/)                     |
 |          | 组件库                                | element-plus                                                 |
 | 插件管理 | 按需引入、自定义插件                  |                                                              |
 | 国际化   | 本地语言数据、远程语言数据            | vue-i18n                                                     |
 | 主题管理 |                                       |                                                              |
-| http     | 集成全局 Token、Token刷新、校验、清除 | [xw-ui/xhttp](https://sewar-x.github.io/X-UI/zh-CN/components/library/xhttp/%E4%BD%BF%E7%94%A8.html#%E5%8A%9F%E8%83%BD) |
+| http     | 集成全局 Token、Token刷新、校验、清除 | [sewen-ui/xhttp](https://sewar-x.github.io/X-UI/zh-CN/components/library/xhttp/%E4%BD%BF%E7%94%A8.html#%E5%8A%9F%E8%83%BD) |
 | 开发     | mock数据                              |                                                              |
 |          | 页面模板生成                          | plop                                                         |
 | 测试     |                                       |                                                              |
@@ -69,11 +69,11 @@
 
 ### HTTP 插件
 
-HTTP  插件是使用 [XHTTP | XW-UI ](https://sewar-x.github.io/X-UI/zh-CN/components/library/xhttp/使用.html) 插件，该插件是对 Axios 进行二次封装，增加了 登录 Token 管理相关逻辑。
+HTTP  插件是使用 [XHTTP | sewen-ui ](https://sewar-x.github.io/X-UI/zh-CN/components/library/xhttp/使用.html) 插件，该插件是对 Axios 进行二次封装，增加了 登录 Token 管理相关逻辑。
 
 ### Permission 插件
 
-权限控制插件是使用 [permission 插件 | XW-UI ](https://sewar-x.github.io/X-UI/zh-CN/components/library/vivien-permission/使用.html) 插件，[permission 插件 | XW-UI ](https://sewar-x.github.io/X-UI/zh-CN/components/library/vivien-permission/使用.html) 插件是一个基于后台管理系统中的路由菜单权限控制系统，通过 vue-router 全局控制后台管理系统的菜单权限。
+权限控制插件是使用 [permission 插件 | sewen-ui ](https://sewar-x.github.io/X-UI/zh-CN/components/library/vivien-permission/使用.html) 插件，[permission 插件 | sewen-ui ](https://sewar-x.github.io/X-UI/zh-CN/components/library/vivien-permission/使用.html) 插件是一个基于后台管理系统中的路由菜单权限控制系统，通过 vue-router 全局控制后台管理系统的菜单权限。
 
 **插件功能**：
 
@@ -89,7 +89,7 @@ HTTP  插件是使用 [XHTTP | XW-UI ](https://sewar-x.github.io/X-UI/zh-CN/comp
 
 ```javascript
 import type { App } from "vue";
-import initPermission from "xw-ui/permission"
+import initPermission from "sewen-ui/permission"
 import asyncRoutes from "@/router/asyncRoutes";
 import basicRoutes from "@/router/basicRoutes";
 import whiteList from "@/router/basicRoutes/whiteList";
@@ -128,7 +128,7 @@ async function getCallback(params: any) {
 
 该方法提供插件相关初始化函数。
 
->  插件配置文档：[permission 插件 | XW-UI (sewar-x.github.io)](https://sewar-x.github.io/X-UI/zh-CN/components/library/vivien-permission/使用.html#配置)
+>  插件配置文档：[permission 插件 | sewen-ui (sewar-x.github.io)](https://sewar-x.github.io/X-UI/zh-CN/components/library/vivien-permission/使用.html#配置)
 
 
 
@@ -172,7 +172,7 @@ VITE_USE_XW_UI_PERMISSION=true
 
 ### XElementPlus 组件
 
-[XElementPlus 组件总览 | XW-UI ](https://sewar-x.github.io/X-UI/zh-CN/components/element-plus/Vue3-基础组件/Vue3-组件总览.html) 是基于 Element-Plus 二次封装，使用 JSON Scheme 配置化生成式组件库。
+[XElementPlus 组件总览 | sewen-ui ](https://sewar-x.github.io/X-UI/zh-CN/components/element-plus/Vue3-基础组件/Vue3-组件总览.html) 是基于 Element-Plus 二次封装，使用 JSON Scheme 配置化生成式组件库。
 
 ### Element-Plus 组件
 
@@ -269,7 +269,7 @@ const i18n = createI18n({
 
 ## 登录校验
 
-HTTP 请求使用 [XHTTP | XW-UI ](https://sewar-x.github.io/X-UI/zh-CN/components/library/xhttp/使用.html) 插件，该插件是对 Axios 进行二次封装，加入了以下功能：
+HTTP 请求使用 [XHTTP | sewen-ui ](https://sewar-x.github.io/X-UI/zh-CN/components/library/xhttp/使用.html) 插件，该插件是对 Axios 进行二次封装，加入了以下功能：
 
 | 功能                           | 介绍                                                         |
 | ------------------------------ | ------------------------------------------------------------ |
@@ -299,7 +299,7 @@ HTTP 请求使用 [XHTTP | XW-UI ](https://sewar-x.github.io/X-UI/zh-CN/componen
 
 ## 权限和路由
 
-权限模块使用 [permission 插件 | XW-UI ](https://sewar-x.github.io/X-UI/zh-CN/components/library/vivien-permission/使用.html)  ，该插件提供以下功能：
+权限模块使用 [permission 插件 | sewen-ui ](https://sewar-x.github.io/X-UI/zh-CN/components/library/vivien-permission/使用.html)  ，该插件提供以下功能：
 
 | 功能             | 介绍                                                     |
 | ---------------- | -------------------------------------------------------- |

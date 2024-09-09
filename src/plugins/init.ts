@@ -42,7 +42,7 @@ export const initElementPlus = async (app: App) => {
   })
 }
 
-// 初始化 json scheme 组件库 xw-ui/element-plus
+// 初始化 json scheme 组件库 sewen-ui/element-plus
 export const initXWElementPlus = async (app: App) => {
   return await import('@/plugins/xw-element-plus/index').then(async (XWUIModule: any) => {
     return await XWUIModule.setuploadXWElementPlus(app)

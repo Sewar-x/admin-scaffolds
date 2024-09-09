@@ -1,5 +1,5 @@
 import type { App } from 'vue'
-import initPermission from 'xw-ui/permission'
+import initPermission from 'sewen-ui/permission'
 import asyncRoutes from '@/router/asyncRoutes'
 import basicRoutes from '@/router/basicRoutes'
 import whiteList from '@/router/basicRoutes/whiteList'

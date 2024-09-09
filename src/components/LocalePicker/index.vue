@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { XDropdown } from "xw-ui/element-plus";
+import { XDropdown } from "sewen-ui/element-plus";
 import { unref, computed } from "vue";
 import type { LocaleType } from "#/config";
 import { useLocale } from "@/plugins/locales/useLocale";

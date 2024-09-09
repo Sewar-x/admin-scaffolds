@@ -1,4 +1,4 @@
-import { createXhttp } from 'xw-ui/xhttp'
+import { createXhttp } from 'sewen-ui/xhttp'
 import requestSetting from "@/settings/requestSetting"
 
 

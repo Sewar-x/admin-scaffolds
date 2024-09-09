@@ -1,6 +1,6 @@
 // 引入全局样式
 import '@/styles/index.less'
-import { reloadHacker } from 'xw-ui/permission'
+import { reloadHacker } from 'sewen-ui/permission'
 
 import {
   initVue,
@@ -51,7 +51,7 @@ async function bootstrap() {
   }
   // 加载自定义组件
   await initDefineComponent(app)
-  // 引入 XW-UI Element Plus
+  // 引入 sewen-ui Element Plus
   if (VITE_USE_XW_UI_ELEMENT_PLUS === 'true') {
     await initXWElementPlus(app)
   }
