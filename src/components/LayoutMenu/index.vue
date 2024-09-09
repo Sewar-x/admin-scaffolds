@@ -9,7 +9,7 @@
       </div>
     </template>
     <template #viewer>
-      <div :class="[`${prefixCls}-viewer`]" v-if="isMicroApp && isBaseApp">
+      <div :class="[`${prefixCls}-viewer`]" v-if="microBaseApp">
         <div :class="[`${prefixCls}-viewer-microapp`]" v-if="isMicroAppView">
           <MicroAppContainer :options="microAppOptions" />
         </div>
@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { watchEffect, ref, type Ref } from "vue";
+import { computed, watchEffect, ref, type Ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { LayoutMenu } from "sewen-ui/element-plus";
 import Logo from "/logo.svg";
@@ -41,6 +41,9 @@ const routeStore = routesStoreWithOut();
 const router = useRouter();
 const route = useRoute();
 
+const microBaseApp = computed(() => {
+  return  isMicroApp() && isBaseApp()
+})
 const options = {
   routeInst: router,
   layoutMode: ProjectConfig.layoutMode,
@@ -48,6 +51,11 @@ const options = {
   asyncRoutes: routeStore.getAddRoutes,
   asyncSideRoutes: routeStore.getAdminRoutes,
   defaultActive: ProjectConfig.defaultActive,
+  event: {
+    click: (value: any) => {
+      console.log("🚀 ~ handleMenuClick ~ value:", value)
+    },
+  }
 };
 
 let isMicroAppView: Ref =ref(false);
@@ -56,6 +64,8 @@ watchEffect(async () => {
   microAppOptions.value = route.meta.microAppOptions
   isMicroAppView.value = !isNullOrUnDef(microAppOptions.value) && !isEmpty(microAppOptions.value)
 });
+
+
 </script>
 
 <style scoped lang="less">
@@ -66,7 +76,7 @@ watchEffect(async () => {
     width: 180px;
   }
   &-logo {
-    height: 60px;
+    width: 150px; 
   }
 
   &-locales {
@@ -76,11 +86,13 @@ watchEffect(async () => {
     height: 20px;
   }
   &-viewer,
-  &-viewer-microapp {
+  &-viewer-microapp { 
     width: 100%;
     height: 100%;
   }
-
+  :deep(.xw-ui-menus-header_slot) {
+    align-items: center;  
+  }
   :deep(.layout-content-main) {
     padding: 0;
   }

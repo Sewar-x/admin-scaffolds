@@ -14,6 +14,6 @@ const props = defineProps<{
 }>();
 const { getPrefixCls } = useDesign();
 const prefixCls = getPrefixCls("micro-app");
-const name = microAppUtils?.MicroAppName(props.options?.name);
+const name = microAppUtils?.getMicroAppName(props.options?.name);
 </script>
 <style></style>

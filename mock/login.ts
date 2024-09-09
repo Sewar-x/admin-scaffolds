@@ -51,7 +51,9 @@ export default [
                         'asyncMenu1',
                         'asyncMenu2',
                         'asyncMenu3',
-                        'vueAdminApp',
+                        'microApp',
+                        'oldApp',
+                        'newApp',
                     ], // 菜单权限名称列表
                     rule: [],// 按钮级别权限
                 }
